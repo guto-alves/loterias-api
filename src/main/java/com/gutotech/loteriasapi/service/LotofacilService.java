@@ -27,7 +27,7 @@ public class LotofacilService {
 	}
 	
 	public boolean notExists(int id) {
-		return repository.existsById(id);
+		return !repository.existsById(id);
 	}
 	
 	public void save(Lotofacil lotofacil) {

@@ -69,7 +69,7 @@ public class MegaSenaConsumer {
 	public static MegaSena getLatestResult() {
 		try {
 			List<MegaSena> results = getAllResults();
-			return results.get(results.size() - 1);
+			return results.get(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

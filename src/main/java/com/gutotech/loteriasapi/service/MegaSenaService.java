@@ -27,7 +27,7 @@ public class MegaSenaService {
 	}
 
 	public boolean notExists(int id) {
-		return repository.existsById(id);
+		return !repository.existsById(id);
 	}
 
 	public void save(MegaSena lotofacil) {

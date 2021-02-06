@@ -32,7 +32,7 @@ public class ScheduledConsumer {
 		System.out.println("The time is now " + Instant.now());
 		updateResults();
 	}
-
+	
 	@Scheduled(cron = "0 15 21 * * MON-SAT", zone = "America/Sao_Paulo")
 	public void checkForNewResults2115() {
 		System.out.println("The time is now " + Instant.now());
@@ -59,6 +59,7 @@ public class ScheduledConsumer {
 
 		Lotofacil latestLotofacil = LotofacilConsumer.getLatestResult();
 		if (latestLotofacil != null && lotofacilService.notExists(latestLotofacil.getConcurso())) {
+			System.out.println("Saving latest Loto result");
 			lotofacilService.save(latestLotofacil);
 		}
 
