@@ -12,24 +12,31 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gutotech.loteriasapi.model.MegaSena;
 import com.gutotech.loteriasapi.service.MegaSenaService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("megasena")
+@Api(tags = "Mega Sena")
 public class MegaSenaController {
 
 	@Autowired
 	private MegaSenaService service;
 
 	@GetMapping
+	@ApiOperation(value = "Retorna todos os resultados já realizados")
 	public ResponseEntity<List<MegaSena>> getAllResults() {
 		return ResponseEntity.ok(service.findAll());
 	}
 
-	@GetMapping("concurso/{id}")
-	public ResponseEntity<MegaSena> getResultById(@PathVariable("id") int id) {
+	@GetMapping("concurso/{numero}")
+	@ApiOperation(value = "Retorna o resultado do número do concurso especificado")
+	public ResponseEntity<MegaSena> getResultById(@PathVariable("numero") int id) {
 		return ResponseEntity.ok(service.findById(id));
 	}
 
 	@GetMapping("latest")
+	@ApiOperation(value = "Retorna o resultado mais recente")
 	public ResponseEntity<MegaSena> getLatestResult() {
 		return ResponseEntity.ok(service.findLatest());
 	}

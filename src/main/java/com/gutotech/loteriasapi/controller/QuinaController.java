@@ -12,24 +12,31 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gutotech.loteriasapi.model.Quina;
 import com.gutotech.loteriasapi.service.QuinaService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("quina")
+@Api(tags = "Quina")
 public class QuinaController {
 
 	@Autowired
 	private QuinaService service;
 
 	@GetMapping
+	@ApiOperation(value = "Retornas todos os resultados já realizados")
 	public ResponseEntity<List<Quina>> getAllResults() {
 		return ResponseEntity.ok(service.findAll());
 	}
 
-	@GetMapping("concurso/{id}")
-	public ResponseEntity<Quina> getResultById(@PathVariable("id") int id) {
+	@GetMapping("concurso/{numero}")
+	@ApiOperation(value = "Retorna o resultado do número do concurso específicado")
+	public ResponseEntity<Quina> getResultById(@PathVariable("numero") int id) {
 		return ResponseEntity.ok(service.findById(id));
 	}
 
 	@GetMapping("latest")
+	@ApiOperation(value = "Retorna o resultado mais recente")
 	public ResponseEntity<Quina> getLatestResult() {
 		return ResponseEntity.ok(service.findLatest());
 	}
