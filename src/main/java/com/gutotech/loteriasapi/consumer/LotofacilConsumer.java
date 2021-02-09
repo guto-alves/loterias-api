@@ -83,7 +83,7 @@ public class LotofacilConsumer {
 				Lotofacil result = toResult(row);
 
 				if (result != null) {
-					results.add(0, result);
+					results.add(result);
 				}
 			}
 		} catch (Exception e) {

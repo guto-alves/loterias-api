@@ -57,7 +57,7 @@ public class MegaSenaConsumer {
 			}
 
 			if (++infoIndex == TOTAL_INFOS) {
-				results.add(0, result);
+				results.add(result);
 				result = new MegaSena();
 				infoIndex = 0;
 			}
@@ -69,7 +69,7 @@ public class MegaSenaConsumer {
 	public static MegaSena getLatestResult() {
 		try {
 			List<MegaSena> results = getAllResults();
-			return results.get(0);
+			return results.get(results.size() - 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -94,7 +94,7 @@ public class QuinaConsumer {
 				Quina result = toResult(row);
 
 				if (result != null) {
-					results.add(0, result);
+					results.add(result);
 				}
 			}
 		} catch (Exception e) {

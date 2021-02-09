@@ -34,4 +34,8 @@ public class QuinaService {
 		repository.save(quina);
 	}
 
+	public void saveAll(List<Quina> newResults) {
+		repository.saveAll(newResults);
+	}
+
 }

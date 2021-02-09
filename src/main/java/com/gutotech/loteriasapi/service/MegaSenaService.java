@@ -34,4 +34,8 @@ public class MegaSenaService {
 		repository.save(lotofacil);
 	}
 
+	public void saveAll(List<MegaSena> newResults) {
+		repository.saveAll(newResults);
+	}
+
 }
