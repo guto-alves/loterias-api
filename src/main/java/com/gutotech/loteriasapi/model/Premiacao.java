@@ -4,7 +4,7 @@ public class Premiacao {
 	private String nome;
 	private int acertos;
 	private int vencedores;
-	private String premio;
+	private String premio = "0,00";
 
 	public Premiacao() {
 	}
