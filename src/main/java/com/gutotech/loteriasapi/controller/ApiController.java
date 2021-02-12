@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gutotech.loteriasapi.model.exception.ResourceNotFoundException;
 import com.gutotech.loteriasapi.service.LotofacilService;
 import com.gutotech.loteriasapi.service.LotomaniaService;
 import com.gutotech.loteriasapi.service.MegaSenaService;
@@ -24,6 +25,9 @@ import io.swagger.annotations.ApiOperation;
 public class ApiController {
 
 	private final List<String> lotteries = Arrays.asList("megasena", "lotofacil", "quina", "lotomania");
+
+	private final String invalidLotteryMessageFormat = 
+			"'%s' não é a key de nenhuma das loterias suportadas. Loterias suportadas: " + lotteries;
 
 	@Autowired
 	private MegaSenaService megaSenaService;
@@ -45,8 +49,8 @@ public class ApiController {
 	@GetMapping("{loteria}")
 	@ApiOperation(value = "Retorna todos os resultados já realizados da loteria especificada.")
 	public ResponseEntity<Object> getAllResults(@PathVariable("loteria") String loteria) {
-		if (!loteria.contains(loteria)) {
-			return ResponseEntity.ok(null);
+		if (!lotteries.contains(loteria)) {
+			throw new ResourceNotFoundException(String.format(invalidLotteryMessageFormat, loteria));
 		}
 
 		Object body = null;
@@ -66,11 +70,10 @@ public class ApiController {
 
 	@GetMapping("{loteria}/{concurso}")
 	@ApiOperation(value = "Retorna o resultado da loteria e concurso especificado.")
-	public ResponseEntity<Object> getResultById(
-			@PathVariable("loteria") String loteria,
+	public ResponseEntity<Object> getResultById(@PathVariable("loteria") String loteria,
 			@PathVariable("concurso") Integer id) {
-		if (!loteria.contains(loteria)) {
-			return ResponseEntity.ok(null);
+		if (!lotteries.contains(loteria)) {
+			throw new ResourceNotFoundException(String.format(invalidLotteryMessageFormat, loteria));
 		}
 
 		Object body = null;
@@ -91,6 +94,10 @@ public class ApiController {
 	@GetMapping("{loteria}/latest")
 	@ApiOperation(value = "Retorna o resultado mais recente da loteria especificada.")
 	public ResponseEntity<Object> getResultLatest(@PathVariable("loteria") String loteria) {
+		if (!lotteries.contains(loteria)) {
+			throw new ResourceNotFoundException(String.format(invalidLotteryMessageFormat, loteria));
+		}
+
 		Object body = null;
 
 		if (loteria.equals("megasena")) {

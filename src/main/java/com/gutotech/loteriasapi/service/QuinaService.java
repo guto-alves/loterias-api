@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gutotech.loteriasapi.model.Quina;
+import com.gutotech.loteriasapi.model.exception.ResourceNotFoundException;
 import com.gutotech.loteriasapi.repository.QuinaRepository;
 
 @Service
@@ -19,7 +20,7 @@ public class QuinaService {
 	}
 
 	public Quina findById(int id) {
-		return repository.findById(id).get();
+		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Concurso não encontrado!"));
 	}
 
 	public Quina findLatest() {

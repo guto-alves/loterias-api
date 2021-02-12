@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gutotech.loteriasapi.model.MegaSena;
+import com.gutotech.loteriasapi.model.exception.ResourceNotFoundException;
 import com.gutotech.loteriasapi.repository.MegaSenaRepository;
 
 @Service
@@ -19,7 +20,7 @@ public class MegaSenaService {
 	}
 
 	public MegaSena findById(int id) {
-		return repository.findById(id).get();
+		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Concurso não encontrado!"));
 	}
 
 	public MegaSena findLatest() {
