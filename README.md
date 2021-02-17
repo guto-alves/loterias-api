@@ -5,9 +5,9 @@ API Gratuita de resultado de jogos das [Loterias CAIXA](http://loterias.caixa.go
 Espero melhorar a API com o tempo. Por enquanto, as mudanças nem sempre serão compatíveis com versões anteriores.
 
 ## Exemplos de Retorno
-Atualmente o banco de dados contém apenas os jogos das loterias Mega Sena, Lotofácil e Quina.
+Atualmente o banco de dados contém apenas os jogos das loterias ...
 
-https://loterias-api-gutotech.herokuapp.com/api/v0: 
+https://loterias-api-gutotech.herokuapp.com/api/v0
 ```
 [
   "megasena",
