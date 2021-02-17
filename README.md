@@ -7,47 +7,57 @@ Espero melhorar a API com o tempo. Por enquanto, as mudanças nem sempre serão 
 ## Exemplos de Retorno
 Atualmente o banco de dados contém apenas os jogos das loterias Mega Sena, Lotofácil e Quina.
 
+https://loterias-api-gutotech.herokuapp.com/api/v0: 
+```
+[
+  "megasena",
+  "lotofacil",
+  "quina",
+  "lotomania"
+]
+```
+
 * **Resultado mais Recente**
 
-Por exemplo da Mega Sena, em: https://loterias-api-gutotech.herokuapp.com/megasena/latest
+Por exemplo da Mega Sena, em: https://loterias-api-gutotech.herokuapp.com/api/v0/megasena/latest
 ```
 {
-  "concurso": 2341,
+  "concurso": 2344,
   "local": "SÃO PAULO, SP",
-  "data": "03/02/2021",
+  "data": "13/02/2021",
   "dezenas": [
-    "04",
-    "09",
-    "31",
-    "32",
-    "42",
-    "46"
+    "11",
+    "17",
+    "25",
+    "38",
+    "52",
+    "57"
   ],
   "premiacoes": [
     {
       "nome": "Sena",
       "acertos": 6,
-      "vencedores": 1,
-      "premio": "25.099.868,34"
+      "vencedores": 0,
+      "premio": "0,00"
     },
     {
       "nome": "Quina",
       "acertos": 5,
       "vencedores": 59,
-      "premio": "47.999,27"
+      "premio": "42.795,90"
     },
     {
       "nome": "Quadra",
       "acertos": 4,
-      "vencedores": 3548,
-      "premio": "1.140,26"
+      "vencedores": 4548,
+      "premio": "793,11"
     }
   ],
   "cidadeVencedor": "",
-  "valorArrecadado": "49.118.593,50",
-  "valorEstimado": "2.500.000,00",
-  "valorAcumulado": "5.677.642,74",
-  "acumulado": "NAO",
+  "valorArrecadado": "43.793.878,50",
+  "valorEstimado": "29.000.000,00",
+  "valorAcumulado": "7.345.762,60",
+  "acumulado": "SIM",
   "sorteioEspecial": "SIM",
   "observacoes": ""
 }
@@ -55,7 +65,7 @@ Por exemplo da Mega Sena, em: https://loterias-api-gutotech.herokuapp.com/megase
 
 * **Resultado Específico**
 
-Lotofácil: https://loterias-api-gutotech.herokuapp.com/lotofacil/concurso/2151
+Lotofácil: https://loterias-api-gutotech.herokuapp.com/api/v0/lotofacil/2151
 ```
 {
   "concurso": 2151,
