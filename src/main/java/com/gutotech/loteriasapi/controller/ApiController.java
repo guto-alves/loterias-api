@@ -42,6 +42,7 @@ public class ApiController {
 	private LotomaniaService lotomaniaService;
 
 	@GetMapping
+	@ApiOperation(value = "Retorna todos as loterias disponíveis em nossa base.")
 	public ResponseEntity<List<String>> getLotteries() {
 		return ResponseEntity.ok(lotteries);
 	}
@@ -112,4 +113,5 @@ public class ApiController {
 
 		return ResponseEntity.ok(body);
 	}
+	
 }
