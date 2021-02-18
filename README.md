@@ -19,7 +19,9 @@ https://loterias-api-gutotech.herokuapp.com/api/v0
 
 * **Resultado mais Recente**
 
-Por exemplo da Mega Sena, em: https://loterias-api-gutotech.herokuapp.com/api/v0/megasena/latest
+Por exemplo da Mega Sena, em: 
+
+https://loterias-api-gutotech.herokuapp.com/api/v0/megasena/latest
 ```
 {
   "concurso": 2344,
