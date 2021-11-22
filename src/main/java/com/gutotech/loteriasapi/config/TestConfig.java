@@ -14,8 +14,8 @@ import com.gutotech.loteriasapi.repository.LotomaniaRepository;
 import com.gutotech.loteriasapi.repository.MegaSenaRepository;
 import com.gutotech.loteriasapi.repository.QuinaRepository;
 
-@Configuration
-@Profile("dev")
+//@Configuration
+//@Profile("dev")
 public class TestConfig implements CommandLineRunner {
 	@Autowired
 	private MegaSenaRepository megaSenaRepository;

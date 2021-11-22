@@ -14,8 +14,8 @@ import com.gutotech.loteriasapi.service.LotofacilService;
 import com.gutotech.loteriasapi.service.MegaSenaService;
 import com.gutotech.loteriasapi.service.QuinaService;
 
-@Component
-@EnableScheduling
+//@Component
+//@EnableScheduling
 public class ScheduledConsumer {
 
 	@Autowired

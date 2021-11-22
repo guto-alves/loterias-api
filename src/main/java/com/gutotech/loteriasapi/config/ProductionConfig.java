@@ -18,8 +18,8 @@ import com.gutotech.loteriasapi.service.LotofacilService;
 import com.gutotech.loteriasapi.service.MegaSenaService;
 import com.gutotech.loteriasapi.service.QuinaService;
 
-@Configuration
-@Profile("prod")
+//@Configuration
+//@Profile("prod")
 public class ProductionConfig implements CommandLineRunner {
 	@Autowired
 	private MegaSenaService megaSenaService;
