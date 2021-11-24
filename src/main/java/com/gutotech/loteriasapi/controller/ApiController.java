@@ -10,36 +10,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gutotech.loteriasapi.model.Resultado;
 import com.gutotech.loteriasapi.model.exception.ResourceNotFoundException;
-import com.gutotech.loteriasapi.service.LotofacilService;
-import com.gutotech.loteriasapi.service.LotomaniaService;
-import com.gutotech.loteriasapi.service.MegaSenaService;
-import com.gutotech.loteriasapi.service.QuinaService;
+import com.gutotech.loteriasapi.service.ResultadoService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("api/v0")
+@RequestMapping("api")
 @Api(tags = "Loterias")
 public class ApiController {
 
-	private final List<String> lotteries = Arrays.asList("megasena", "lotofacil", "quina", "lotomania");
+	private final List<String> lotteries = Arrays.asList(
+			"mega-sena", "lotofacil", "quina", "lotomania", "timemania",
+			"dupla-sena", "loteria-federal", "dia-de-sorte", "super-sete");
 
 	private final String invalidLotteryMessageFormat = 
-			"'%s' não é a key de nenhuma das loterias suportadas. Loterias suportadas: " + lotteries;
+			"'%s' não é o id de nenhuma das loterias suportadas. Loterias suportadas: " + lotteries;
 
 	@Autowired
-	private MegaSenaService megaSenaService;
-
-	@Autowired
-	private LotofacilService lotofacilService;
-
-	@Autowired
-	private QuinaService quinaService;
-
-	@Autowired
-	private LotomaniaService lotomaniaService;
+	private ResultadoService resultadoService;
 
 	@GetMapping
 	@ApiOperation(value = "Retorna todos as loterias disponíveis em nossa base.")
@@ -49,69 +40,33 @@ public class ApiController {
 
 	@GetMapping("{loteria}")
 	@ApiOperation(value = "Retorna todos os resultados já realizados da loteria especificada.")
-	public ResponseEntity<Object> getAllResults(@PathVariable("loteria") String loteria) {
+	public ResponseEntity<List<Resultado>> getAllResults(@PathVariable("loteria") String loteria) {
 		if (!lotteries.contains(loteria)) {
 			throw new ResourceNotFoundException(String.format(invalidLotteryMessageFormat, loteria));
 		}
 
-		Object body = null;
-
-		if (loteria.equals("megasena")) {
-			body = megaSenaService.findAll();
-		} else if (loteria.equals("lotofacil")) {
-			body = lotofacilService.findAll();
-		} else if (loteria.equals("quina")) {
-			body = quinaService.findAll();
-		} else if (loteria.equals("lotomania")) {
-			body = lotomaniaService.findAll();
-		}
-
-		return ResponseEntity.ok(body);
+		return ResponseEntity.ok(resultadoService.findByLoteria(loteria));
 	}
 
 	@GetMapping("{loteria}/{concurso}")
 	@ApiOperation(value = "Retorna o resultado da loteria e concurso especificado.")
-	public ResponseEntity<Object> getResultById(@PathVariable("loteria") String loteria,
-			@PathVariable("concurso") Integer id) {
+	public ResponseEntity<Resultado> getResultById(@PathVariable("loteria") String loteria,
+			@PathVariable("concurso") Integer concurso) {
 		if (!lotteries.contains(loteria)) {
 			throw new ResourceNotFoundException(String.format(invalidLotteryMessageFormat, loteria));
 		}
 
-		Object body = null;
-
-		if (loteria.equals("megasena")) {
-			body = megaSenaService.findById(id);
-		} else if (loteria.equals("lotofacil")) {
-			body = lotofacilService.findById(id);
-		} else if (loteria.equals("quina")) {
-			body = quinaService.findById(id);
-		} else if (loteria.equals("lotomania")) {
-			body = lotomaniaService.findById(id);
-		}
-
-		return ResponseEntity.ok(body);
+		return ResponseEntity.ok(resultadoService.findByLoteriaAndConcurso(loteria, concurso));
 	}
 
 	@GetMapping("{loteria}/latest")
 	@ApiOperation(value = "Retorna o resultado mais recente da loteria especificada.")
-	public ResponseEntity<Object> getResultLatest(@PathVariable("loteria") String loteria) {
+	public ResponseEntity<Resultado> getLatestResult(@PathVariable("loteria") String loteria) {
 		if (!lotteries.contains(loteria)) {
 			throw new ResourceNotFoundException(String.format(invalidLotteryMessageFormat, loteria));
 		}
 
-		Object body = null;
-
-		if (loteria.equals("megasena")) {
-			body = megaSenaService.findLatest();
-		} else if (loteria.equals("lotofacil")) {
-			body = lotofacilService.findLatest();
-		} else if (loteria.equals("quina")) {
-			body = quinaService.findLatest();
-		} else if (loteria.equals("lotomania")) {
-			body = lotomaniaService.findLatest();
-		}
-
-		return ResponseEntity.ok(body);
+		return ResponseEntity.ok(resultadoService.findLatest(loteria));
 	}
-	
+
 }
