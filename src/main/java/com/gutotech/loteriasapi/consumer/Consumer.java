@@ -32,7 +32,7 @@ public class Consumer {
 			concurso = "";
 		}
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM//yyyy");
-		
+
 		Document doc = SSLHelper.getConnection(BASE_URL + loteria + "/resultados/" + concurso).get();
 		Element resultElement = doc.getElementById("DivDeVisibilidade[0]");
 
@@ -79,7 +79,7 @@ public class Consumer {
 			premiacao.setAcertos(tr.getElementsByClass("td").get(0).text());
 
 			try {
-				premiacao.setVencedores(Integer.parseInt(tr.getElementsByClass("td").get(1).text()));
+				premiacao.setVencedores(Integer.parseInt(tr.getElementsByClass("td").get(1).children().get(0).text()));
 			} catch (Exception e) {
 				premiacao.setVencedores(0);
 			}
@@ -104,7 +104,7 @@ public class Consumer {
 				calendar.setTime(new Date());
 				calendar.add(Calendar.DATE, 1);
 				dataProxConcurso = dateFormat.format(calendar.getTime());
-			}			
+			}
 		}
 		resultado.setDataProxConcurso(dataProxConcurso);
 
