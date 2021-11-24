@@ -40,17 +40,12 @@
 		<dependency>
 		  	<groupId>org.jsoup</groupId>
 		  	<artifactId>jsoup</artifactId>
-		  	<version>1.13.1</version>
+		  	<version>1.14.3</version>
 		</dependency>
 		<dependency>
 		    <groupId>io.springfox</groupId>
-		    <artifactId>springfox-swagger2</artifactId>
-		    <version>2.9.2</version>
-		</dependency>
-		<dependency>
-		    <groupId>io.springfox</groupId>
-		    <artifactId>springfox-swagger-ui</artifactId>
-		    <version>2.9.2</version>
+		    <artifactId>springfox-boot-starter</artifactId>
+		    <version>3.0.0</version>
 		</dependency>
 	</dependencies>
 
