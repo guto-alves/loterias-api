@@ -140,7 +140,7 @@ Lotofácil, concurso 2013: https://loterias-gutotech.herokuapp.com/api/lotofacil
  
 Para mais informações sobre todas as operações da API acesse: 
 
-https://loterias-api-gutotech.herokuapp.com
+https://loterias-gutotech.herokuapp.com
 
 ## Contribuição
 
