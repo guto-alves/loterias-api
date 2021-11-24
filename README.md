@@ -7,125 +7,132 @@ Espero melhorar a API com o tempo. Por enquanto, as mudanças nem sempre serão 
 ## Exemplos de Retorno
 Atualmente o banco de dados contém apenas os jogos das loterias ...
 
-https://loterias-api-gutotech.herokuapp.com/api/v0
+https://loterias-gutotech.herokuapp.com/api
+
 ```
 [
-  "megasena",
+  "mega-sena",
   "lotofacil",
   "quina",
-  "lotomania"
+  "lotomania",
+  "timemania",
+  "dupla-sena",
+  "loteria-federal",
+  "dia-de-sorte",
+  "super-sete"
 ]
 ```
 
 * **Resultado mais Recente**
 
+```https://loterias-gutotech.herokuapp.com/api/<loteria>/latest```
+
 Por exemplo da Mega Sena, em: 
 
-https://loterias-api-gutotech.herokuapp.com/api/v0/megasena/latest
+https://loterias-gutotech.herokuapp.com/api/mega-sena/latest
+
 ```
 {
-  "concurso": 2344,
-  "local": "SÃO PAULO, SP",
-  "data": "13/02/2021",
+  "loteria": "mega-sena",
+  "nome": "Mega-Sena",
+  "concurso": 2430,
+  "data": "20/11/2021",
+  "local": "ESPAÇO LOTERIAS CAIXA em SÃO PAULO, SP",
   "dezenas": [
-    "11",
-    "17",
-    "25",
-    "38",
-    "52",
-    "57"
+    "19",
+    "26",
+    "39",
+    "45",
+    "46",
+    "56"
   ],
   "premiacoes": [
     {
-      "nome": "Sena",
-      "acertos": 6,
-      "vencedores": 0,
-      "premio": "0,00"
+      "acertos": "Sena",
+      "vencedores": 1,
+      "premio": "39.690.444,50"
     },
     {
-      "nome": "Quina",
-      "acertos": 5,
-      "vencedores": 59,
-      "premio": "42.795,90"
+      "acertos": "Quina",
+      "vencedores": 37,
+      "premio": "96.493,78"
     },
     {
-      "nome": "Quadra",
-      "acertos": 4,
-      "vencedores": 4548,
-      "premio": "793,11"
+      "acertos": "Quadra",
+      "vencedores": 4109,
+      "premio": "1.241,27"
     }
   ],
-  "cidadeVencedor": "",
-  "valorArrecadado": "43.793.878,50",
-  "valorEstimado": "29.000.000,00",
-  "valorAcumulado": "7.345.762,60",
-  "acumulado": "SIM",
-  "sorteioEspecial": "SIM",
-  "observacoes": ""
+  "acumulado": false,
+  "acumuladaProxConcurso": "R$ 3 Milhões",
+  "dataProxConcurso": "24/11/2021",
+  "proxConcurso": 2431,
+  "timeCoracao": null,
+  "mesSorte": null
 }
 ```
 
 * **Resultado Específico**
 
-Lotofácil: https://loterias-api-gutotech.herokuapp.com/api/v0/lotofacil/2151
+Lotofácil, concurso 2013: https://loterias-gutotech.herokuapp.com/api/lotofacil/2013
+
 ```
 {
-  "concurso": 2151,
-  "data": "05/02/2021",
+  "loteria": "lotofacil",
+  "nome": "Lotofácil",
+  "concurso": 2013,
+  "data": "17/08/2020",
+  "local": "Espaço Loterias Caixa em SÃO PAULO, SP",
   "dezenas": [
     "01",
-    "03",
-    "06",
+    "02",
+    "04",
     "07",
     "08",
-    "09",
+    "10",
     "11",
-    "12",
-    "13",
     "14",
-    "15",
-    "18",
+    "16",
+    "19",
+    "20",
     "21",
-    "22",
-    "24"
+    "23",
+    "24",
+    "25"
   ],
   "premiacoes": [
     {
-      "nome": "15 Acertos",
-      "acertos": 15,
-      "vencedores": 1,
-      "premio": "1.837.096,27"
+      "acertos": "15 Pontos",
+      "vencedores": 5,
+      "premio": "547.050,76"
     },
     {
-      "nome": "14 Acertos",
-      "acertos": 14,
-      "vencedores": 180,
-      "premio": "2.139,99"
+      "acertos": "14 Pontos",
+      "vencedores": 578,
+      "premio": "905,44"
     },
     {
-      "nome": "13 Acertos",
-      "acertos": 13,
-      "vencedores": 7358,
+      "acertos": "13 Pontos",
+      "vencedores": 16161,
       "premio": "25,00"
     },
     {
-      "nome": "12 Acertos",
-      "acertos": 12,
-      "vencedores": 109252,
+      "acertos": "12 Pontos",
+      "vencedores": 169887,
       "premio": "10,00"
     },
     {
-      "nome": "11 Acertos",
-      "acertos": 11,
-      "vencedores": 684383,
+      "acertos": "11 Pontos",
+      "vencedores": 825856,
       "premio": "5,00"
     }
   ],
-  "acumulado15": "0,00",
-  "estimativaPremio": "1.500.000,00",
-  "valorAcumuladoEspecial": "43.328.848,88",
-  "arrecadacaoTotal": null,
-  "cidadeVencedor": ""
+  "acumulado": false,
+  "acumuladaProxConcurso": "",
+  "dataProxConcurso": "",
+  "proxConcurso": 2014,
+  "timeCoracao": null,
+  "mesSorte": null
 }
 ```
 
@@ -133,4 +140,8 @@ Lotofácil: https://loterias-api-gutotech.herokuapp.com/api/v0/lotofacil/2151
  
 Para mais informações sobre todas as operações da API acesse: 
 
-https://loterias-api-gutotech.herokuapp.com/swagger-ui.html
+https://loterias-api-gutotech.herokuapp.com
+
+## Contribuição
+
+Quaisquer contribuições para este repositório são bem-vindas.
