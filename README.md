@@ -136,6 +136,10 @@ Lotofácil, concurso 2013: https://loterias-gutotech.herokuapp.com/api/lotofacil
 }
 ```
 
+-  **Observações sobre o retorno**
+
+Os campos <i><b>timeCoracao</b></i> e <i><b>mesSorte</b></i> só terão algum valor quando a loteria pesquisada for Timemania (timemania) ou Dia de Sorte (dia-de-sorte) respectivamente.
+
 ## Documentação da API
  
 Para mais informações sobre todas as operações da API acesse: 
