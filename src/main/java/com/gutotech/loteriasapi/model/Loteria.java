@@ -1,6 +1,7 @@
 package com.gutotech.loteriasapi.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Loteria {
 	MEGA_SENA("mega-sena"), 
@@ -32,7 +33,7 @@ public enum Loteria {
 		return List.of(Loteria.values())
 				.stream()
 				.map(Loteria::getNome)
-				.toList();
+				.collect(Collectors.toList());
 	}
 
 }
