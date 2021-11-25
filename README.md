@@ -75,7 +75,7 @@ https://loterias-gutotech.herokuapp.com/api/mega-sena/latest
 
 * **Resultado Específico**
 
-Lotofácil, concurso 2013: https://loterias-gutotech.herokuapp.com/api/lotofacil/2013
+Lotofácil, concurso 2027: https://loterias-gutotech.herokuapp.com/api/lotofacil/2027
 
 ```
 
