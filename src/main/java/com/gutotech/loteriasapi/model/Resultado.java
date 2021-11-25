@@ -10,9 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @Document("resultados")
-@JsonPropertyOrder({ "loteria", "nome", "concurso", "data", "local", "dezenas", 
-	"premiacoes", "acumulado", "acumuladaProxConcurso", "dataProxConcurso", 
-	"proxConcurso", "timeCoracao", "mesSorte" })
+@JsonPropertyOrder({ "loteria", "nome", "concurso", "data", "local", "dezenas", "premiacoes", "acumulado",
+		"acumuladaProxConcurso", "dataProxConcurso", "proxConcurso", "timeCoracao", "mesSorte" })
 public class Resultado {
 	@Id
 	private ResultadoId id = new ResultadoId();
@@ -21,6 +20,7 @@ public class Resultado {
 	private String local;
 	private List<String> dezenas = new ArrayList<>();
 	private List<Premiacao> premiacoes = new ArrayList<>();
+	private List<Estado> estadosPremiados = new ArrayList<>();
 	private boolean acumulado;
 	private String acumuladaProxConcurso;
 	private String dataProxConcurso;
@@ -88,6 +88,14 @@ public class Resultado {
 
 	public void setPremiacoes(List<Premiacao> premiacoes) {
 		this.premiacoes = premiacoes;
+	}
+
+	public List<Estado> getEstadosPremiados() {
+		return estadosPremiados;
+	}
+
+	public void setEstadosPremiados(List<Estado> estadosPremiados) {
+		this.estadosPremiados = estadosPremiados;
 	}
 
 	public boolean isAcumulado() {

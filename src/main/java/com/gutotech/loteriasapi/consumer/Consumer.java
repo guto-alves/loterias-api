@@ -5,12 +5,17 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gutotech.loteriasapi.model.Estado;
 import com.gutotech.loteriasapi.model.Premiacao;
 import com.gutotech.loteriasapi.model.Resultado;
 import com.gutotech.loteriasapi.model.ResultadoId;
@@ -86,6 +91,16 @@ public class Consumer {
 			premiacao.setPremio(tr.getElementsByClass("td").get(2).text());
 
 			resultado.getPremiacoes().add(premiacao);
+		}
+		
+		// Estados premiados
+		Element buttonWin = resultElement.getElementsByClass("button-win").first();
+		if (buttonWin != null) {
+			String json = buttonWin.attr("data-estados-premiados");
+			ObjectMapper objectMapper = new ObjectMapper();
+			objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			List<Estado> estados = objectMapper.readValue(json, new TypeReference<List<Estado>>() {});	
+			resultado.setEstadosPremiados(estados);
 		}
 
 		// Acumulado
