@@ -104,7 +104,7 @@ public class Consumer {
 		}
 
 		// Acumulado
-		resultado.setAcumulado(resultElement.getElementsByClass("acumulado").size() > 0);
+		resultado.setAcumulou(resultElement.getElementsByClass("acumulado").size() > 0);
 		resultado.setAcumuladaProxConcurso(resultElement.getElementsByClass("estimative").select(".value").text());
 
 		// Data Proximo Concurso
