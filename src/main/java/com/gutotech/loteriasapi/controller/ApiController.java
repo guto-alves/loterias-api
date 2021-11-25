@@ -1,6 +1,5 @@
 package com.gutotech.loteriasapi.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gutotech.loteriasapi.model.Loteria;
 import com.gutotech.loteriasapi.model.Resultado;
 import com.gutotech.loteriasapi.model.exception.ResourceNotFoundException;
 import com.gutotech.loteriasapi.service.ResultadoService;
@@ -23,8 +23,7 @@ import io.swagger.annotations.ApiParam;
 @Api(tags = "Loterias")
 public class ApiController {
 
-	private final List<String> lotteries = Arrays.asList("mega-sena", "lotofacil", "quina", "lotomania", "timemania",
-			"dupla-sena", "loteria-federal", "dia-de-sorte", "super-sete");
+	private final List<String> lotteries = Loteria.asList();
 
 	private final String ALLOWABLE_VALUES = "mega-sena, lotofacil, quina, lotomania, timemania, dupla-sena, loteria-federal, dia-de-sorte, super-sete";
 
@@ -37,7 +36,7 @@ public class ApiController {
 	@GetMapping
 	@ApiOperation(value = "Retorna todas as loterias disponíveis para pesquisa.")
 	public ResponseEntity<List<String>> getLotteries() {
-		return ResponseEntity.ok(lotteries);
+		return ResponseEntity.ok(Loteria.asList());
 	}
 
 	@GetMapping("{loteria}")

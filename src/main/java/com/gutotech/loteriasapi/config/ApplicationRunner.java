@@ -4,17 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
-import com.gutotech.loteriasapi.consumer.Consumer;
+import com.gutotech.loteriasapi.consumer.LoteriasUpdate;
 
 @Configuration
-public class InitialLoadConfig implements CommandLineRunner {
+public class ApplicationRunner implements CommandLineRunner {
 
 	@Autowired
-	private Consumer consumer;
-	
+	private LoteriasUpdate loteriasUpdate;
+
 	@Override
 	public void run(String... args) throws Exception {
-		consumer.checkForUpdates();
+		loteriasUpdate.checkForUpdates();
 	}
 
 }

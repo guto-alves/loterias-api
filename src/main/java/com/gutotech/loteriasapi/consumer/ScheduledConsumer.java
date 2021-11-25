@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class ScheduledConsumer {
 
 	@Autowired
-	private Consumer consumer;
+	private LoteriasUpdate loteriasUpdate;
 
 	@Scheduled(cron = "0 0 21 * * MON-SAT", zone = "America/Sao_Paulo")
 	public void checkForNewResults21() {
@@ -41,7 +41,7 @@ public class ScheduledConsumer {
 
 	public void checkForUpdates() {
 		try {
-			consumer.checkForUpdates();
+			loteriasUpdate.checkForUpdates();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

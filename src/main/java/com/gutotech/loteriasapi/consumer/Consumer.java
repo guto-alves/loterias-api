@@ -3,34 +3,33 @@ package com.gutotech.loteriasapi.consumer;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gutotech.loteriasapi.model.Premiacao;
 import com.gutotech.loteriasapi.model.Resultado;
 import com.gutotech.loteriasapi.model.ResultadoId;
-import com.gutotech.loteriasapi.service.ResultadoService;
 import com.gutotech.loteriasapi.util.SSLHelper;
 
 @Component
 public class Consumer {
-	@Autowired
-	private ResultadoService resultadoService;
 
 	private final String BASE_URL = "https://www.sorteonline.com.br/";
+	
+	public Resultado getResultado(String loteria, int concurso) throws IOException {
+		return getResultado(loteria, String.valueOf(concurso));
+	}
 
 	public Resultado getResultado(String loteria, String concurso) throws IOException {
 		if (concurso == null) {
 			concurso = "";
 		}
+
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM//yyyy");
 
 		Document doc = SSLHelper.getConnection(BASE_URL + loteria + "/resultados/" + concurso).get();
@@ -48,7 +47,7 @@ public class Consumer {
 
 		// Data
 		String data = resultElement.getElementsByClass("header-resultados__datasorteio").text();
-		if (data.equals("HOJE")) {
+		if (data.toUpperCase().equals("HOJE")) {
 			data = dateFormat.format(new Date());
 		}
 		resultado.setData(data);
@@ -120,28 +119,5 @@ public class Consumer {
 
 		return resultado;
 	}
-
-	public void checkForUpdates() throws IOException {
-		final List<String> loterias = Arrays.asList(
-				"mega-sena", "lotofacil", "quina", "lotomania", "timemania",
-				"dupla-sena", "loteria-federal", "dia-de-sorte", "super-sete");
-
-		for (String loteria : loterias) {
-			checkForUpdates(loteria);
-		}
-	}
-
-	private void checkForUpdates(final String loteria) throws IOException {
-		Resultado latestResultado = getResultado(loteria, null);
-
-		Resultado myLatestResultado = resultadoService.findLatest(loteria);
-
-		if (myLatestResultado.getConcurso() < latestResultado.getConcurso()) {
-			for (int concurso = myLatestResultado.getConcurso() + 1; 
-					concurso <= latestResultado.getConcurso(); concurso++) {
-				Resultado resultado = getResultado(loteria, String.valueOf(concurso));
-				resultadoService.save(resultado);
-			}
-		}
-	}
+	
 }
