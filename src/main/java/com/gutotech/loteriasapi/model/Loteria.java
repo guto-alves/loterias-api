@@ -20,10 +20,6 @@ public enum Loteria {
 		this.nome = nome;
 	}
 	
-	public String getNome() {
-		return nome;
-	}
-	
 	@Override
 	public String toString() {
 		return nome;
@@ -32,7 +28,7 @@ public enum Loteria {
 	public static List<String> asList() {
 		return List.of(Loteria.values())
 				.stream()
-				.map(Loteria::getNome)
+				.map(Loteria::toString)
 				.collect(Collectors.toList());
 	}
 

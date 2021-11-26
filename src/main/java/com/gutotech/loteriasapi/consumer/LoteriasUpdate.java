@@ -19,7 +19,7 @@ public class LoteriasUpdate {
 
 	public void checkForUpdates() throws IOException {
 		for (Loteria loteria : Loteria.values()) {
-			loteriaUpdateTask.checkForUpdates(loteria.getNome());
+			loteriaUpdateTask.checkForUpdates(loteria.toString());
 		}
 	}
 
