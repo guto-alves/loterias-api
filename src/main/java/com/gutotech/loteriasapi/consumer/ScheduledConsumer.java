@@ -14,6 +14,12 @@ public class ScheduledConsumer {
 
 	@Autowired
 	private LoteriasUpdate loteriasUpdate;
+	
+	@Scheduled(cron = "0 0 12 * * MON-SAT", zone = "America/Sao_Paulo")
+	public void checkForNewResults12() {
+		System.out.println("The time is now " + Instant.now());
+		checkForUpdates();
+	}
 
 	@Scheduled(cron = "0 0 21 * * MON-SAT", zone = "America/Sao_Paulo")
 	public void checkForNewResults21() {
@@ -33,8 +39,14 @@ public class ScheduledConsumer {
 		checkForUpdates();
 	}
 
-	@Scheduled(cron = "0 0 0 * * MON-SAT", zone = "America/Sao_Paulo")
-	public void checkForNewResults00() {
+	@Scheduled(cron = "0 20 0 * * MON-SAT", zone = "America/Sao_Paulo")
+	public void checkForNewResults0020() {
+		System.out.println("The time is now " + Instant.now());
+		checkForUpdates();
+	}
+	
+	@Scheduled(cron = "0 0 1 * * MON-SAT", zone = "America/Sao_Paulo")
+	public void checkForNewResults01() {
 		System.out.println("The time is now " + Instant.now());
 		checkForUpdates();
 	}
