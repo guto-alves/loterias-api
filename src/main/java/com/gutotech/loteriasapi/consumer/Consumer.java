@@ -25,7 +25,7 @@ import com.gutotech.loteriasapi.util.SSLHelper;
 public class Consumer {
 
 	private final String BASE_URL = "https://www.sorteonline.com.br/";
-	
+
 	public Resultado getResultado(String loteria, int concurso) throws IOException {
 		return getResultado(loteria, String.valueOf(concurso));
 	}
@@ -83,7 +83,8 @@ public class Consumer {
 			premiacao.setAcertos(tr.getElementsByClass("td").get(0).text());
 
 			try {
-				premiacao.setVencedores(Integer.parseInt(tr.getElementsByClass("td").get(1).children().get(0).text()));
+				premiacao.setVencedores(
+						Integer.parseInt(tr.getElementsByClass("td").get(1).text().replaceAll("[^\\d.]", "")));
 			} catch (Exception e) {
 				premiacao.setVencedores(0);
 			}
@@ -92,14 +93,14 @@ public class Consumer {
 
 			resultado.getPremiacoes().add(premiacao);
 		}
-		
+
 		// Estados premiados
 		Element buttonWin = resultElement.getElementsByClass("button-win").first();
 		if (buttonWin != null) {
 			String json = buttonWin.attr("data-estados-premiados");
 			ObjectMapper objectMapper = new ObjectMapper();
 			objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			List<Estado> estados = objectMapper.readValue(json, new TypeReference<List<Estado>>() {});	
+			List<Estado> estados = objectMapper.readValue(json, new TypeReference<List<Estado>>() {});
 			resultado.setEstadosPremiados(estados);
 		}
 
@@ -134,5 +135,5 @@ public class Consumer {
 
 		return resultado;
 	}
-	
+
 }

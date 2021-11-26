@@ -37,10 +37,19 @@ public class LoteriasUpdate {
 			Resultado latestResultado = consumer.getResultado(loteria, null);
 
 			Resultado myLatestResultado = resultadoService.findLatest(loteria);
-
-			if (myLatestResultado.getConcurso() < latestResultado.getConcurso()) {
-				for (int concurso = myLatestResultado.getConcurso() + 1; 
-						concurso <= latestResultado.getConcurso(); concurso++) {
+			
+			if (myLatestResultado.getConcurso() == latestResultado.getConcurso()) {
+				myLatestResultado.setData(latestResultado.getData());
+				myLatestResultado.setLocal(latestResultado.getLocal());
+				myLatestResultado.setPremiacoes(latestResultado.getPremiacoes());
+				myLatestResultado.setEstadosPremiados(latestResultado.getEstadosPremiados());
+				myLatestResultado.setAcumulou(latestResultado.isAcumulou());
+				myLatestResultado.setAcumuladaProxConcurso(latestResultado.getAcumuladaProxConcurso());
+				myLatestResultado.setDataProxConcurso(latestResultado.getDataProxConcurso());
+				resultadoService.save(myLatestResultado);
+			} else if (myLatestResultado.getConcurso() < latestResultado.getConcurso()) {
+				for (int concurso = latestResultado.getConcurso(); 
+						concurso > myLatestResultado.getConcurso(); concurso--) {
 					try {
 						Resultado resultado = consumer.getResultado(loteria, concurso);
 						resultadoService.save(resultado);
