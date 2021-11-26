@@ -76,15 +76,15 @@ public class Resultado {
 	}
 
 	public List<String> getDezenas() {
-		if (Loteria.DUPLA_SENA.toString().equals(getLoteria())) {
-			List<String> s1 = dezenas.subList(0, 6);
-			List<String> s2 = dezenas.subList(7, 11);
+		if (dezenas.size() == 12 && Loteria.DUPLA_SENA.toString().equals(getLoteria())) {
+			List<String> s1 = new ArrayList<>(dezenas.subList(0, 6));
+			List<String> s2 = new ArrayList<>(dezenas.subList(6, 12));
 			s1.sort(Comparator.naturalOrder());
 			s2.sort(Comparator.naturalOrder());
 			dezenas.clear();
 			dezenas.addAll(s1);
 			dezenas.addAll(s2);
-		} else {
+		} else if (!Loteria.DUPLA_SENA.toString().equals(getLoteria())) {
 			dezenas.sort(Comparator.naturalOrder());
 		}
 
