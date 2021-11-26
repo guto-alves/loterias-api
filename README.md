@@ -66,7 +66,7 @@ https://loterias-gutotech.herokuapp.com/api/mega-sena/latest
   "estadosPremiados": [],
   "acumulou": true,
   "acumuladaProxConcurso": "R$ 7 Milhões",
-  "dataProxConcurso": "27/11/2021",
+  "dataProxConcurso": "27/11//2021",
   "proxConcurso": 2432,
   "timeCoracao": null,
   "mesSorte": null
@@ -78,7 +78,7 @@ https://loterias-gutotech.herokuapp.com/api/mega-sena/latest
 Lotofácil, concurso 2027: https://loterias-gutotech.herokuapp.com/api/lotofacil/2027
 
 ```
-
+{
   "loteria": "lotofacil",
   "nome": "Lotofácil",
   "concurso": 2027,
@@ -130,32 +130,32 @@ Lotofácil, concurso 2027: https://loterias-gutotech.herokuapp.com/api/lotofacil
   ],
   "estadosPremiados": [
     {
-      "NomeEstado": "Maranhão",
-      "SiglaEstado": "MA",
-      "Quantidade": "1",
-      "Latitude": "42.4072107",
-      "Longitude": "-71.3824374",
-      "PremiacaoPorCidade": [
+      "nome": "Maranhão",
+      "uf": "MA",
+      "vencedores": "1",
+      "latitude": "42.4072107",
+      "longitude": "-71.3824374",
+      "cidades": [
         {
-          "NomeCidade": "São Mateus do Maranhão",
-          "Quantidade": "1",
-          "Latitude": "-4.030871299999999",
-          "Longitude": "-44.4654609"
+          "cidade": "São Mateus do Maranhão",
+          "vencedores": "1",
+          "latitude": "-4.030871299999999",
+          "longitude": "-44.4654609"
         }
       ]
     },
     {
-      "NomeEstado": "São Paulo",
-      "SiglaEstado": "SP",
-      "Quantidade": "1",
-      "Latitude": "-23.5557714",
-      "Longitude": "-46.6395571",
-      "PremiacaoPorCidade": [
+      "nome": "São Paulo",
+      "uf": "SP",
+      "vencedores": "1",
+      "latitude": "-23.5557714",
+      "longitude": "-46.6395571",
+      "cidades": [
         {
-          "NomeCidade": "Presidente Epitácio",
-          "Quantidade": "1",
-          "Latitude": "-21.7668273",
-          "Longitude": "-52.1096821"
+          "cidade": "Presidente Epitácio",
+          "vencedores": "1",
+          "latitude": "-21.7668273",
+          "longitude": "-52.1096821"
         }
       ]
     }
