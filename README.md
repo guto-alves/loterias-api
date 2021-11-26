@@ -5,7 +5,7 @@ API Gratuita de resultado de jogos das [Loterias CAIXA](http://loterias.caixa.go
 Espero melhorar a API com o tempo. Por enquanto, as mudanças nem sempre serão compatíveis com versões anteriores.
 
 ## Exemplos de Retorno
-Atualmente o banco de dados contém apenas os jogos das loterias ...
+Atualmente o banco de dados contém os jogos das loterias ...
 
 https://loterias-gutotech.herokuapp.com/api
 
@@ -74,6 +74,8 @@ https://loterias-gutotech.herokuapp.com/api/mega-sena/latest
 ```
 
 * **Resultado Específico**
+
+```https://loterias-gutotech.herokuapp.com/api/<loteria>/<concurso>```
 
 Lotofácil, concurso 2027: https://loterias-gutotech.herokuapp.com/api/lotofacil/2027
 
