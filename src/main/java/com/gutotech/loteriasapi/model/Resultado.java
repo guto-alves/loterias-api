@@ -84,7 +84,9 @@ public class Resultado {
 			dezenas.clear();
 			dezenas.addAll(s1);
 			dezenas.addAll(s2);
-		} else if (!Loteria.DUPLA_SENA.toString().equals(getLoteria())) {
+		} else if (!Loteria.DUPLA_SENA.toString().equals(getLoteria())
+				&& !Loteria.SUPER_SETE.toString().equals(getLoteria())
+				&& !Loteria.FEDERAL.toString().equals(getLoteria())) {
 			dezenas.sort(Comparator.naturalOrder());
 		}
 
