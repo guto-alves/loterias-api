@@ -48,8 +48,8 @@ public class LoteriasUpdate {
 				myLatestResultado.setDataProxConcurso(latestResultado.getDataProxConcurso());
 				resultadoService.save(myLatestResultado);
 			} else if (myLatestResultado.getConcurso() < latestResultado.getConcurso()) {
-				for (int concurso = latestResultado.getConcurso(); 
-						concurso > myLatestResultado.getConcurso(); concurso--) {
+				for (int concurso = myLatestResultado.getConcurso() + 1; 
+						concurso <= latestResultado.getConcurso(); concurso++) {
 					try {
 						Resultado resultado = consumer.getResultado(loteria, concurso);
 						resultadoService.save(resultado);
