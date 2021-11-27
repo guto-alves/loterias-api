@@ -7,7 +7,7 @@ Espero melhorar a API com o tempo. Por enquanto, as mudanças nem sempre serão 
 ## Exemplos de Retorno
 Atualmente o banco de dados contém os jogos das loterias ...
 
-https://loterias-gutotech.herokuapp.com/api
+https://loteriascaixa-api.herokuapp.com/api
 
 ```
 [
@@ -25,11 +25,11 @@ https://loterias-gutotech.herokuapp.com/api
 
 * **Resultado mais Recente**
 
-```https://loterias-gutotech.herokuapp.com/api/<loteria>/latest```
+```https://loteriascaixa-api.herokuapp.com/api/<loteria>/latest```
 
 Por exemplo da Mega Sena, em: 
 
-https://loterias-gutotech.herokuapp.com/api/mega-sena/latest
+https://loteriascaixa-api.herokuapp.com/api/mega-sena/latest
 
 ```
 {
@@ -75,9 +75,9 @@ https://loterias-gutotech.herokuapp.com/api/mega-sena/latest
 
 * **Resultado Específico**
 
-```https://loterias-gutotech.herokuapp.com/api/<loteria>/<concurso>```
+```https://loteriascaixa-api.herokuapp.com/api/<loteria>/<concurso>```
 
-Lotofácil, concurso 2027: https://loterias-gutotech.herokuapp.com/api/lotofacil/2027
+Lotofácil, concurso 2027: https://loteriascaixa-api.herokuapp.com/api/lotofacil/2027
 
 ```
 {
@@ -179,7 +179,7 @@ Os campos <i><b>timeCoracao</b></i> e <i><b>mesSorte</b></i> só terão algum va
  
 Para mais informações sobre todas as operações da API acesse: 
 
-https://loterias-gutotech.herokuapp.com
+https://loteriascaixa-api.herokuapp.com
 
 ## Contribuição
 
