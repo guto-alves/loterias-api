@@ -3,6 +3,7 @@ package com.gutotech.loteriasapi.consumer;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
@@ -17,10 +18,15 @@ public class LoteriasUpdate {
 	@Autowired
 	private LoteriaUpdateTask loteriaUpdateTask;
 
+	@Autowired
+	private CacheManager cacheManager;
+
 	public void checkForUpdates() throws IOException {
 		for (Loteria loteria : Loteria.values()) {
 			loteriaUpdateTask.checkForUpdates(loteria.toString());
 		}
+
+		cacheManager.getCache("resultados").clear();
 	}
 
 	@Component
@@ -37,7 +43,7 @@ public class LoteriasUpdate {
 			Resultado latestResultado = consumer.getResultado(loteria, null);
 
 			Resultado myLatestResultado = resultadoService.findLatest(loteria);
-			
+
 			if (myLatestResultado.getConcurso() == latestResultado.getConcurso()) {
 				myLatestResultado.setData(latestResultado.getData());
 				myLatestResultado.setLocal(latestResultado.getLocal());

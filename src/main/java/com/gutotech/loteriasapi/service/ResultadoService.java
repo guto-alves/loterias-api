@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.gutotech.loteriasapi.model.Resultado;
@@ -17,6 +18,7 @@ public class ResultadoService {
 	@Autowired
 	private ResultadoRepository repository;
 
+	@Cacheable("resultados")
 	public List<Resultado> findByLoteria(String loteria) {
 		return repository.findById_Loteria(loteria)
 				.stream()
@@ -29,9 +31,7 @@ public class ResultadoService {
 	}
 
 	public Resultado findLatest(String loteria) {
-		List<Resultado> resultados = findByLoteria(loteria);
-
-		return resultados.size() > 0 ? resultados.get(0) : new Resultado();
+		return repository.findTopById_Loteria(loteria);
 	}
 
 	public Resultado save(Resultado resultado) {
