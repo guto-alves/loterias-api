@@ -20,9 +20,9 @@ public class ResultadoService {
 
 	@Cacheable("resultados")
 	public List<Resultado> findByLoteria(String loteria) {
-		return repository.findById_Loteria(loteria)
-				.stream()
-				.sorted(Comparator.comparing(Resultado::getConcurso).reversed())
+		return repository.findById_Loteria(loteria) //
+				.stream() //
+				.sorted(Comparator.comparing(Resultado::getConcurso).reversed()) //
 				.collect(Collectors.toList());
 	}
 
@@ -42,7 +42,4 @@ public class ResultadoService {
 		repository.saveAll(resultados);
 	}
 
-	public void deleteAll() {
-		repository.deleteAll();
-	}
 }

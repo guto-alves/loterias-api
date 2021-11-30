@@ -1,4 +1,4 @@
-package com.gutotech.loteriasapi.controller.exception;
+package com.gutotech.loteriasapi.rest.exception;
 
 public class ErrorResponse {
 	private int status;

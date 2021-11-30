@@ -1,4 +1,4 @@
-package com.gutotech.loteriasapi.controller;
+package com.gutotech.loteriasapi.rest;
 
 import java.io.IOException;
 

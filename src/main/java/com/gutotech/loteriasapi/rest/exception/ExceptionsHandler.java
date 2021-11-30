@@ -1,4 +1,4 @@
-package com.gutotech.loteriasapi.controller.exception;
+package com.gutotech.loteriasapi.rest.exception;
 
 import javax.servlet.http.HttpServletRequest;
 

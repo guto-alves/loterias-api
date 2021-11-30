@@ -1,4 +1,4 @@
-package com.gutotech.loteriasapi.controller;
+package com.gutotech.loteriasapi.rest;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping("api")
 @Api(tags = "Loterias")
-public class ApiController {
+public class ApiRestController {
 
 	private final List<String> lotteries = Loteria.asList();
 
@@ -41,7 +41,7 @@ public class ApiController {
 
 	@GetMapping("{loteria}")
 	@ApiOperation(value = "Retorna todos os resultados já realizados da loteria especificada.")
-	public ResponseEntity<List<Resultado>> getAllResults(
+	public ResponseEntity<List<Resultado>> getResultsByLottery(
 			@ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) @PathVariable("loteria") String loteria) {
 		if (!lotteries.contains(loteria)) {
 			throw new ResourceNotFoundException(String.format(invalidLotteryMessageFormat, loteria));
