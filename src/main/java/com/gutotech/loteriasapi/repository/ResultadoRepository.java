@@ -1,6 +1,7 @@
 package com.gutotech.loteriasapi.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -15,6 +16,6 @@ public interface ResultadoRepository extends MongoRepository<Resultado, Resultad
 	List<Resultado> findById_Loteria(String loteria);
 
 	@Query(sort = "{ '_id.concurso' : -1 }")
-	Resultado findTopById_Loteria(String loteria);
+	Optional<Resultado> findTopById_Loteria(String loteria);
 
 }

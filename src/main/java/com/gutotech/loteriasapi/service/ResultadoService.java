@@ -31,7 +31,7 @@ public class ResultadoService {
 	}
 
 	public Resultado findLatest(String loteria) {
-		return repository.findTopById_Loteria(loteria);
+		return repository.findTopById_Loteria(loteria).orElse(new Resultado());
 	}
 
 	public Resultado save(Resultado resultado) {
