@@ -181,6 +181,8 @@ Para mais informações sobre todas as operações da API acesse:
 
 https://loteriascaixa-api.herokuapp.com
 
+![image](https://user-images.githubusercontent.com/48946749/144352143-7140d64d-43a9-465c-b12c-7d5d3514ccd5.png)
+
 ## Contribuição
 
 Quaisquer contribuições para este repositório são bem-vindas.
