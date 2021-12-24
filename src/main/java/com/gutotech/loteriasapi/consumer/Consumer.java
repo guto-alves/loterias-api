@@ -35,7 +35,7 @@ public class Consumer {
 			concurso = "";
 		}
 
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM//yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 		Document doc = SSLHelper.getConnection(BASE_URL + loteria + "/resultados/" + concurso).get();
 		Element resultElement = doc.getElementById("DivDeVisibilidade[0]");
