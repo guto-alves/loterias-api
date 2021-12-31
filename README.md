@@ -183,6 +183,13 @@ https://loteriascaixa-api.herokuapp.com
 
 ![image](https://user-images.githubusercontent.com/48946749/144352143-7140d64d-43a9-465c-b12c-7d5d3514ccd5.png)
 
+## URL's Alternativas
+Em caso de indisponibilidade de serviço, a API possui algumas URL's alternativas que podem ser usadas para manter sua aplicação cliente funcionando. Por exemplo em caso de erro ao tentar https://loteriascaixa-api.herokuapp.com/api/mega-sena/latest podemos substituir a URL base <b>https://loteriascaixa-api.herokuapp.com</b> por uma das listadas abaixo, tal como <b>https://loterias-gutotech.herokuapp.com</b>, resultando então em https://loterias-gutotech.herokuapp.com/api/mega-sena/latest. E não se preoculpe, o resultado retornado usando qualquer URL base alternativa será o mesmo (correto e atualizado como sempre) caso não tivesse ocorrido erro na primeira tentativa.
+
+- https://loterias-gutotech.herokuapp.com
+
+- https://loterias-caixa-gov.herokuapp.com
+
 ## Contribuição
 
 Quaisquer contribuições para este repositório são bem-vindas.
