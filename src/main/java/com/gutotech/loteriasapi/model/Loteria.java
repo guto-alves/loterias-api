@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public enum Loteria {
 	MEGA_SENA("mega-sena"), 
-	LOTOFÁCIL("lotofacil"), 
+	LOTOFACIL("lotofacil"), 
 	QUINA("quina"), 
 	LOTOMANIA("lotomania"), 
 	TIMEMANIA("timemania"),
@@ -14,7 +14,7 @@ public enum Loteria {
 	DIA_DE_SORTE("dia-de-sorte"),
 	SUPER_SETE("super-sete");
 
-	private String nome;
+	private final String nome;
 
 	Loteria(String nome) {
 		this.nome = nome;
