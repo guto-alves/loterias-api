@@ -3,9 +3,17 @@
   <h2 align="center">API Loterias CAIXA</h2>
   <p align="center">
     API Gratuita de resultado de jogos das <a href="http://loterias.caixa.gov.br/wps/portal/loterias">Loterias CAIXA</a>.<br>
-    Espero melhorar a API com o tempo. Por enquanto, as mudanças nem sempre serão compatíveis com versões anteriores.
   </p>
 </p>
+
+
+## Doação (*Importante!*)
+
+A API é 100% gratuita. Porém ela está hospedada no [Heroku](https://www.heroku.com/) que recentemente [parou de oferecer planos de produtos gratuitos](https://blog.heroku.com/next-chapter), portanto agora há custos para mante-lá.
+
+Então se você achou este projeto interessante ou é útil para você de alguma forma, por favor considere fazer uma doação para ajudar com os custos da hospedagem, qualquer valor ajudará.
+
+[![Donate](https://stc.pagseguro.uol.com.br/public/img/botoes/doacoes/120x53-doar.gif)](https://pagseguro.uol.com.br/checkout/nc/nl/donation/sender-identification.jhtml?t=114fb78d91d33fef64cfecd69e5b2c4a1dafece5a33158c19f6f1e0ba71272ea&e=true)
 
 ## Exemplos de Retorno
 Atualmente o banco de dados contém os jogos das loterias ...
