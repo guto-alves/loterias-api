@@ -13,7 +13,7 @@ A API é 100% gratuita. Porém ela está hospedada no [Heroku](https://www.herok
 
 Então se você achou este projeto interessante ou é útil para você de alguma forma, por favor considere fazer uma doação para ajudar com os custos da hospedagem, qualquer valor ajudará.
 
-[![Donate](https://stc.pagseguro.uol.com.br/public/img/botoes/doacoes/120x53-doar.gif)](https://pagseguro.uol.com.br/checkout/nc/nl/donation/sender-identification.jhtml?t=114fb78d91d33fef64cfecd69e5b2c4a1dafece5a33158c19f6f1e0ba71272ea&e=true)
+[![Donate](https://stc.pagseguro.uol.com.br/public/img/botoes/doacoes/120x53-doar.gif)](https://pag.ae/7ZqNrvmsK)
 
 ## Exemplos de Retorno
 Atualmente o banco de dados contém os jogos das loterias ...
