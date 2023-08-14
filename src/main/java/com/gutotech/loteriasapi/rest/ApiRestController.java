@@ -25,7 +25,8 @@ public class ApiRestController {
 
     private final List<String> lotteries = Loteria.asList();
 
-    private final String ALLOWABLE_VALUES = "mega-sena, lotofacil, quina, lotomania, timemania, dupla-sena, loteria-federal, dia-de-sorte, super-sete";
+    private final String ALLOWABLE_VALUES = "maismilionaria, megasena, lotofacil, quina,"
+	    + " lotomania, timemania, duplasena, federal, diadesorte, supersete";
 
     private final String invalidLotteryMessageFormat = "'%s' não é o id de nenhuma das loterias suportadas. Loterias suportadas: "
 	    + lotteries;
