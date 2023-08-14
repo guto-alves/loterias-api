@@ -15,31 +15,31 @@ import com.gutotech.loteriasapi.repository.ResultadoRepository;
 @Service
 public class ResultadoService {
 
-	@Autowired
-	private ResultadoRepository repository;
+    @Autowired
+    private ResultadoRepository repository;
 
-	@Cacheable("resultados")
-	public List<Resultado> findByLoteria(String loteria) {
-		return repository.findById_Loteria(loteria) //
-				.stream() //
-				.sorted(Comparator.comparing(Resultado::getConcurso).reversed()) //
-				.collect(Collectors.toList());
-	}
+    @Cacheable("resultados")
+    public List<Resultado> findByLoteria(String loteria) {
+	return repository.findById_Loteria(loteria) //
+		.stream() //
+		.sorted(Comparator.comparing(Resultado::getConcurso).reversed()) //
+		.collect(Collectors.toList());
+    }
 
-	public Resultado findByLoteriaAndConcurso(String loteria, int concurso) {
-		return repository.findById(new ResultadoId(loteria, concurso)).orElse(null);
-	}
+    public Resultado findByLoteriaAndConcurso(String loteria, int concurso) {
+	return repository.findById(new ResultadoId(loteria, concurso)).orElse(null);
+    }
 
-	public Resultado findLatest(String loteria) {
-		return repository.findTopById_Loteria(loteria).orElse(new Resultado());
-	}
+    public Resultado findLatest(String loteria) {
+	return repository.findTopById_Loteria(loteria).orElse(new Resultado());
+    }
 
-	public Resultado save(Resultado resultado) {
-		return repository.save(resultado);
-	}
+    public Resultado save(Resultado resultado) {
+	return repository.save(resultado);
+    }
 
-	public void saveAll(List<Resultado> resultados) {
-		repository.saveAll(resultados);
-	}
+    public void saveAll(List<Resultado> resultados) {
+	repository.saveAll(resultados);
+    }
 
 }

@@ -23,54 +23,57 @@ import io.swagger.annotations.ApiParam;
 @Api(tags = "Loterias")
 public class ApiRestController {
 
-	private final List<String> lotteries = Loteria.asList();
+    private final List<String> lotteries = Loteria.asList();
 
-	private final String ALLOWABLE_VALUES = "mega-sena, lotofacil, quina, lotomania, timemania, dupla-sena, loteria-federal, dia-de-sorte, super-sete";
+    private final String ALLOWABLE_VALUES = "mega-sena, lotofacil, quina, lotomania, timemania, dupla-sena, loteria-federal, dia-de-sorte, super-sete";
 
-	private final String invalidLotteryMessageFormat = "'%s' não é o id de nenhuma das loterias suportadas. Loterias suportadas: "
-			+ lotteries;
+    private final String invalidLotteryMessageFormat = "'%s' não é o id de nenhuma das loterias suportadas. Loterias suportadas: "
+	    + lotteries;
 
-	@Autowired
-	private ResultadoService resultadoService;
+    @Autowired
+    private ResultadoService resultadoService;
 
-	@GetMapping
-	@ApiOperation(value = "Retorna todas as loterias disponíveis para pesquisa.")
-	public ResponseEntity<List<String>> getLotteries() {
-		return ResponseEntity.ok(Loteria.asList());
+    @GetMapping
+    @ApiOperation(value = "Retorna todas as loterias disponíveis para pesquisa.")
+    public ResponseEntity<List<String>> getLotteries() {
+	return ResponseEntity.ok(Loteria.asList());
+    }
+
+    @GetMapping("{loteria}")
+    @ApiOperation(value = "Retorna todos os resultados já realizados da loteria especificada.")
+    public ResponseEntity<List<Resultado>> getResultsByLottery(
+	    @ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) @PathVariable("loteria") String loteria) {
+	if (!lotteries.contains(loteria)) {
+	    throw new ResourceNotFoundException(
+		    String.format(invalidLotteryMessageFormat, loteria));
 	}
 
-	@GetMapping("{loteria}")
-	@ApiOperation(value = "Retorna todos os resultados já realizados da loteria especificada.")
-	public ResponseEntity<List<Resultado>> getResultsByLottery(
-			@ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) @PathVariable("loteria") String loteria) {
-		if (!lotteries.contains(loteria)) {
-			throw new ResourceNotFoundException(String.format(invalidLotteryMessageFormat, loteria));
-		}
+	return ResponseEntity.ok(resultadoService.findByLoteria(loteria));
+    }
 
-		return ResponseEntity.ok(resultadoService.findByLoteria(loteria));
+    @GetMapping("{loteria}/{concurso}")
+    @ApiOperation(value = "Retorna o resultado da loteria e concurso especificado.")
+    public ResponseEntity<Resultado> getResultById(
+	    @ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) @PathVariable("loteria") String loteria,
+	    @PathVariable("concurso") Integer concurso) {
+	if (!lotteries.contains(loteria)) {
+	    throw new ResourceNotFoundException(
+		    String.format(invalidLotteryMessageFormat, loteria));
 	}
 
-	@GetMapping("{loteria}/{concurso}")
-	@ApiOperation(value = "Retorna o resultado da loteria e concurso especificado.")
-	public ResponseEntity<Resultado> getResultById(
-			@ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) @PathVariable("loteria") String loteria,
-			@PathVariable("concurso") Integer concurso) {
-		if (!lotteries.contains(loteria)) {
-			throw new ResourceNotFoundException(String.format(invalidLotteryMessageFormat, loteria));
-		}
+	return ResponseEntity.ok(resultadoService.findByLoteriaAndConcurso(loteria, concurso));
+    }
 
-		return ResponseEntity.ok(resultadoService.findByLoteriaAndConcurso(loteria, concurso));
+    @GetMapping("{loteria}/latest")
+    @ApiOperation(value = "Retorna o resultado mais recente da loteria especificada.")
+    public ResponseEntity<Resultado> getLatestResult(
+	    @ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) @PathVariable("loteria") String loteria) {
+	if (!lotteries.contains(loteria)) {
+	    throw new ResourceNotFoundException(
+		    String.format(invalidLotteryMessageFormat, loteria));
 	}
 
-	@GetMapping("{loteria}/latest")
-	@ApiOperation(value = "Retorna o resultado mais recente da loteria especificada.")
-	public ResponseEntity<Resultado> getLatestResult(
-			@ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) @PathVariable("loteria") String loteria) {
-		if (!lotteries.contains(loteria)) {
-			throw new ResourceNotFoundException(String.format(invalidLotteryMessageFormat, loteria));
-		}
-
-		return ResponseEntity.ok(resultadoService.findLatest(loteria));
-	}
+	return ResponseEntity.ok(resultadoService.findLatest(loteria));
+    }
 
 }

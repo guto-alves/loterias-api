@@ -11,12 +11,12 @@ import com.gutotech.loteriasapi.consumer.LoteriasUpdate;
 @EnableCaching
 public class ApplicationRunner implements CommandLineRunner {
 
-	@Autowired
-	private LoteriasUpdate loteriasUpdate;
+    @Autowired
+    private LoteriasUpdate loteriasUpdate;
 
-	@Override
-	public void run(String... args) throws Exception {
-		loteriasUpdate.checkForUpdates();
-	}
+    @Override
+    public void run(String... args) throws Exception {
+	loteriasUpdate.checkForUpdates();
+    }
 
 }

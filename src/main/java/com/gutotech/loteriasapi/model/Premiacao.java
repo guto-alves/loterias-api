@@ -1,41 +1,50 @@
 package com.gutotech.loteriasapi.model;
 
 public class Premiacao {
-	private String acertos;
-	private int vencedores;
-	private String premio;
+    private String descricao;
+    private int faixa;
+    private int ganhadores;
+    private double valorPremio;
 
-	public Premiacao() {
-	}
+    public Premiacao() {
+    }
 
-	public Premiacao(String acertos, int vencedores, String premio) {
-		this.acertos = acertos;
-		this.vencedores = vencedores;
-		this.premio = premio;
-	}
+    public Premiacao(String acertos, int vencedores, double premio) {
+	this.descricao = acertos;
+	this.ganhadores = vencedores;
+	this.valorPremio = premio;
+    }
 
-	public String getAcertos() {
-		return acertos;
-	}
+    public String getDescricao() {
+	return descricao;
+    }
 
-	public void setAcertos(String acertos) {
-		this.acertos = acertos;
-	}
+    public void setDescricao(String acertos) {
+	this.descricao = acertos;
+    }
 
-	public int getVencedores() {
-		return vencedores;
-	}
+    public int getFaixa() {
+	return faixa;
+    }
 
-	public void setVencedores(int vencedores) {
-		this.vencedores = vencedores;
-	}
+    public void setFaixa(int faixa) {
+	this.faixa = faixa;
+    }
 
-	public String getPremio() {
-		return premio;
-	}
+    public int getGanhadores() {
+	return ganhadores;
+    }
 
-	public void setPremio(String premio) {
-		this.premio = premio;
-	}
+    public void setGanhadores(int vencedores) {
+	this.ganhadores = vencedores;
+    }
+
+    public double getValorPremio() {
+	return valorPremio;
+    }
+
+    public void setValorPremio(double premio) {
+	this.valorPremio = premio;
+    }
 
 }

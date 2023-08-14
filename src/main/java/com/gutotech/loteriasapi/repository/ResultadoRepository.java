@@ -13,9 +13,9 @@ import com.gutotech.loteriasapi.model.ResultadoId;
 @Repository
 public interface ResultadoRepository extends MongoRepository<Resultado, ResultadoId> {
 
-	List<Resultado> findById_Loteria(String loteria);
+    List<Resultado> findById_Loteria(String loteria);
 
-	@Query(sort = "{ '_id.concurso' : -1 }")
-	Optional<Resultado> findTopById_Loteria(String loteria);
+    @Query(sort = "{ '_id.concurso' : -1 }")
+    Optional<Resultado> findTopById_Loteria(String loteria);
 
 }

@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LoteriasApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(LoteriasApiApplication.class, args);
-	}
+    public static void main(String[] args) {
+	SpringApplication.run(LoteriasApiApplication.class, args);
+    }
 
 }

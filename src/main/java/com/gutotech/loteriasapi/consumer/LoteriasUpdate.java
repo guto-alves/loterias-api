@@ -1,6 +1,7 @@
 package com.gutotech.loteriasapi.consumer;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
@@ -15,57 +16,71 @@ import com.gutotech.loteriasapi.service.ResultadoService;
 @Component
 public class LoteriasUpdate {
 
-	@Autowired
-	private LoteriaUpdateTask loteriaUpdateTask;
+    @Autowired
+    private LoteriaUpdateTask loteriaUpdateTask;
 
-	@Autowired
-	private CacheManager cacheManager;
+    @Autowired
+    private CacheManager cacheManager;
 
-	public void checkForUpdates() throws IOException {
-		for (Loteria loteria : Loteria.values()) {
-			loteriaUpdateTask.checkForUpdates(loteria.toString());
-		}
-
-		cacheManager.getCache("resultados").clear();
+    public void checkForUpdates() throws IOException {
+	for (Loteria loteria : Loteria.values()) {
+	    loteriaUpdateTask.checkForUpdates(loteria.toString());
 	}
 
-	@Component
-	@EnableAsync
-	class LoteriaUpdateTask {
-		@Autowired
-		private Consumer consumer;
+	cacheManager.getCache("resultados").clear();
+    }
 
-		@Autowired
-		private ResultadoService resultadoService;
+    @Component
+    @EnableAsync
+    class LoteriaUpdateTask {
+	@Autowired
+	private Consumer consumer;
 
-		@Async
-		public void checkForUpdates(final String loteria) throws IOException {
-			Resultado latestResultado = consumer.getResultado(loteria, null);
+	@Autowired
+	private ResultadoService resultadoService;
 
-			Resultado myLatestResultado = resultadoService.findLatest(loteria);
+	@Async
+	public void checkForUpdates(final String loteria) throws IOException {
+	    Resultado latestResultado = consumer.getResultado(loteria, null);
 
-			if (myLatestResultado.getConcurso() == latestResultado.getConcurso()) {
-				myLatestResultado.setData(latestResultado.getData());
-				myLatestResultado.setLocal(latestResultado.getLocal());
-				myLatestResultado.setPremiacoes(latestResultado.getPremiacoes());
-				myLatestResultado.setEstadosPremiados(latestResultado.getEstadosPremiados());
-				myLatestResultado.setAcumulou(latestResultado.isAcumulou());
-				myLatestResultado.setAcumuladaProxConcurso(latestResultado.getAcumuladaProxConcurso());
-				myLatestResultado.setDataProxConcurso(latestResultado.getDataProxConcurso());
-				resultadoService.save(myLatestResultado);
-			} else if (myLatestResultado.getConcurso() < latestResultado.getConcurso()) {
-				for (int concurso = myLatestResultado.getConcurso() + 1; 
-						concurso <= latestResultado.getConcurso(); concurso++) {
-					try {
-						Resultado resultado = consumer.getResultado(loteria, concurso);
-						resultadoService.save(resultado);
-					} catch (IOException e) {
-						System.out.println("Erro: " + e.getMessage());
-						--concurso;
-					}
-				}
-			}
+	    Resultado myLatestResultado = resultadoService.findLatest(loteria);
+
+	    if (myLatestResultado.getConcurso() == latestResultado.getConcurso()) {
+		myLatestResultado.setData(latestResultado.getData());
+		myLatestResultado.setLocal(latestResultado.getLocal());
+
+		myLatestResultado.setPremiacoes(latestResultado.getPremiacoes());
+		myLatestResultado.setEstadosPremiados(latestResultado.getEstadosPremiados());
+		myLatestResultado.setAcumulou(latestResultado.isAcumulou());
+		myLatestResultado.setDataProximoConcurso(latestResultado.getDataProximoConcurso());
+
+		resultadoService.save(myLatestResultado);
+	    } else if (myLatestResultado.getConcurso() < latestResultado.getConcurso()) {
+		System.out.println("COMECANDO " + loteria);
+
+		for (int concurso = myLatestResultado.getConcurso() + 1; concurso <= latestResultado
+			.getConcurso(); concurso++) {
+		    try {
+			Resultado resultado = consumer.getResultado(loteria,
+				String.valueOf(concurso));
+			resultadoService.save(resultado);
+		    } catch (SocketTimeoutException | java.net.ConnectException e) {
+			System.out.printf("Erro (A): (%s, %d) - %s %s \n", loteria, concurso,
+				e.getClass(), e.getMessage());
+			--concurso;
+		    } catch (IOException e) {
+			System.out.printf("Erro (I): (%s, %d) - %s %s \n", loteria, concurso,
+				e.getClass(), e.getMessage());
+		    } catch (Exception e) {
+			System.out.printf("Erro (E): (%s, %d) - %s %s \n", loteria, concurso,
+				e.getClass(), e.getMessage());
+			e.printStackTrace();
+		    }
 		}
+
+		System.out.println("TERMINANDO " + loteria);
+	    }
 	}
+    }
 
 }
