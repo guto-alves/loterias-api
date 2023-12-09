@@ -1,3 +1,9 @@
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
+![GitHub stars](https://img.shields.io/github/stars/guto-alves/loterias-api)
+<a href="https://t.me/+VNG9nOMxG1NkMTEx">
+<img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" height="20" />
+</a>
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/48946749/147809259-e7b15a3b-2e90-42c2-abaf-a6cacdc77e03.png">
   <h2 align="center">API Loterias CAIXA</h2>
