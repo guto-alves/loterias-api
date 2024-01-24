@@ -1,3 +1,9 @@
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
+![GitHub stars](https://img.shields.io/github/stars/guto-alves/loterias-api)
+<a href="https://t.me/+VNG9nOMxG1NkMTEx">
+<img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" height="20" />
+</a>
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/48946749/147809259-e7b15a3b-2e90-42c2-abaf-a6cacdc77e03.png">
   <h2 align="center">API Loterias CAIXA</h2>
@@ -24,15 +30,16 @@ https://loteriascaixa-api.herokuapp.com/api
 
 ```
 [
-  "mega-sena",
+  "maismilionaria",
+  "megasena",
   "lotofacil",
   "quina",
   "lotomania",
   "timemania",
-  "dupla-sena",
-  "loteria-federal",
-  "dia-de-sorte",
-  "super-sete"
+  "duplasena",
+  "federal",
+  "diadesorte",
+  "supersete"
 ]
 ```
 
@@ -40,153 +47,101 @@ https://loteriascaixa-api.herokuapp.com/api
 
 ```https://loteriascaixa-api.herokuapp.com/api/<loteria>/latest```
 
-Por exemplo da Mega Sena, em: 
+Por exemplo, consultado pelo resultado da Mega-Sena mais recente: 
 
-https://loteriascaixa-api.herokuapp.com/api/mega-sena/latest
+https://loteriascaixa-api.herokuapp.com/api/megasena/latest
 
 ```
 {
-  "loteria": "mega-sena",
-  "nome": "Mega-Sena",
-  "concurso": 2431,
-  "data": "24/11/2021",
-  "local": "ESPAÇO LOTERIAS CAIXA em SÃO PAULO, SP",
-  "dezenas": [
-    "08",
-    "11",
-    "22",
-    "25",
+  "loteria": "megasena",
+  "concurso": 2620,
+  "data": "12/08/2023",
+  "local": "ESPAÇO DA SORTE em SÃO PAULO, SP",
+  "dezenasOrdemSorteio": [
     "26",
-    "36"
-  ],
-  "premiacoes": [
-    {
-      "acertos": "Sena",
-      "vencedores": 0,
-      "premio": "-"
-    },
-    {
-      "acertos": "Quina",
-      "vencedores": 46,
-      "premio": "35.595,61"
-    },
-    {
-      "acertos": "Quadra",
-      "vencedores": 2988,
-      "premio": "782,84"
-    }
-  ],
-  "estadosPremiados": [],
-  "acumulou": true,
-  "acumuladaProxConcurso": "R$ 7 Milhões",
-  "dataProxConcurso": "27/11//2021",
-  "proxConcurso": 2432,
-  "timeCoracao": null,
-  "mesSorte": null
-}
-```
-
-* **Resultado Específico**
-
-```https://loteriascaixa-api.herokuapp.com/api/<loteria>/<concurso>```
-
-Lotofácil, concurso 2027: https://loteriascaixa-api.herokuapp.com/api/lotofacil/2027
-
-```
-{
-  "loteria": "lotofacil",
-  "nome": "Lotofácil",
-  "concurso": 2027,
-  "data": "02/09/2020",
-  "local": "Espaço Loterias Caixa em SÃO PAULO, SP",
-  "dezenas": [
-    "01",
-    "02",
-    "03",
-    "06",
-    "07",
-    "09",
-    "12",
-    "13",
-    "16",
-    "17",
-    "20",
     "21",
-    "23",
-    "24",
-    "25"
+    "13",
+    "04",
+    "06",
+    "28"
   ],
+  "dezenas": [
+    "04",
+    "06",
+    "13",
+    "21",
+    "26",
+    "28"
+  ],
+  "trevos": [
+    
+  ],
+  "timeCoracao": "",
+  "mesSorte": "",
   "premiacoes": [
     {
-      "acertos": "15 Pontos",
-      "vencedores": 2,
-      "premio": "1.617.835,87"
+      "descricao": "6 acertos",
+      "faixa": 1,
+      "ganhadores": 4,
+      "valorPremio": 29058128.28
     },
     {
-      "acertos": "14 Pontos",
-      "vencedores": 408,
-      "premio": "1.393,71"
+      "descricao": "5 acertos",
+      "faixa": 2,
+      "ganhadores": 404,
+      "valorPremio": 23042.04
     },
     {
-      "acertos": "13 Pontos",
-      "vencedores": 13288,
-      "premio": "25,00"
-    },
-    {
-      "acertos": "12 Pontos",
-      "vencedores": 146003,
-      "premio": "10,00"
-    },
-    {
-      "acertos": "11 Pontos",
-      "vencedores": 782964,
-      "premio": "5,00"
+      "descricao": "4 acertos",
+      "faixa": 3,
+      "ganhadores": 21667,
+      "valorPremio": 613.76
     }
   ],
   "estadosPremiados": [
+    
+  ],
+  "observacao": "",
+  "acumulou": false,
+  "proximoConcurso": 2621,
+  "dataProximoConcurso": "16/08/2023",
+  "localGanhadores": [
     {
-      "nome": "Maranhão",
-      "uf": "MA",
-      "vencedores": "1",
-      "latitude": "42.4072107",
-      "longitude": "-71.3824374",
-      "cidades": [
-        {
-          "cidade": "São Mateus do Maranhão",
-          "vencedores": "1",
-          "latitude": "-4.030871299999999",
-          "longitude": "-44.4654609"
-        }
-      ]
+      "ganhadores": 1,
+      "municipio": "CANAL ELETRONICO",
+      "nomeFatansiaUL": "",
+      "serie": "",
+      "posicao": 1,
+      "uf": "--"
     },
     {
-      "nome": "São Paulo",
-      "uf": "SP",
-      "vencedores": "1",
-      "latitude": "-23.5557714",
-      "longitude": "-46.6395571",
-      "cidades": [
-        {
-          "cidade": "Presidente Epitácio",
-          "vencedores": "1",
-          "latitude": "-21.7668273",
-          "longitude": "-52.1096821"
-        }
-      ]
+      "ganhadores": 1,
+      "municipio": "UBERABA",
+      "nomeFatansiaUL": "",
+      "serie": "",
+      "posicao": 1,
+      "uf": "MG"
+    },
+    {
+      "ganhadores": 2,
+      "municipio": "SINOP",
+      "nomeFatansiaUL": "",
+      "serie": "",
+      "posicao": 1,
+      "uf": "MT"
     }
   ],
-  "acumulou": false,
-  "acumuladaProxConcurso": "",
-  "dataProxConcurso": "",
-  "proxConcurso": 2028,
-  "timeCoracao": null,
-  "mesSorte": null
+  "valorArrecadado": 161458740,
+  "valorAcumuladoConcurso_0_5": 10778824.03,
+  "valorAcumuladoConcursoEspecial": 72866210.44,
+  "valorAcumuladoProximoConcurso": 0.0,
+  "valorEstimadoProximoConcurso": 3500000.0
 }
 ```
 
 -  **Observações sobre o retorno**
 
-Os campos <i><b>timeCoracao</b></i> e <i><b>mesSorte</b></i> só terão algum valor quando a loteria pesquisada for Timemania (timemania) ou Dia de Sorte (dia-de-sorte) respectivamente.
+Os campos <i><b>timeCoracao</b></i> e <i><b>mesSorte</b></i> só terão algum valor quando a loteria pesquisada for Timemania (timemania) ou Dia de Sorte (diadesorte) respectivamente.
 
 ## Documentação da API
  
@@ -198,4 +153,4 @@ https://loteriascaixa-api.herokuapp.com/swagger-ui/#/Loterias
 
 ## Contribuição
 
-Quaisquer contribuições para este repositório são bem-vindas.
+Quaisquer contribuições para este repositório são bem-vindas! Em caso de problema, dúvida ou dificuldade não hesite em criar uma [Issue](https://github.com/guto-alves/loterias-api/issues).
