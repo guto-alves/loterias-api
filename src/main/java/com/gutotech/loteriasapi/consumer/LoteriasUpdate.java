@@ -2,6 +2,8 @@ package com.gutotech.loteriasapi.consumer;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
@@ -22,7 +24,7 @@ public class LoteriasUpdate {
     @Autowired
     private CacheManager cacheManager;
 
-    public void checkForUpdates() throws IOException {
+    public void checkForUpdates() throws Exception {
 	for (Loteria loteria : Loteria.values()) {
 	    loteriaUpdateTask.checkForUpdates(loteria.toString());
 	}
@@ -40,7 +42,7 @@ public class LoteriasUpdate {
 	private ResultadoService resultadoService;
 
 	@Async
-	public void checkForUpdates(final String loteria) throws IOException {
+	public void checkForUpdates(final String loteria) throws Exception {
 	    Resultado latestResultado = consumer.getResultado(loteria, null);
 
 	    Resultado myLatestResultado = resultadoService.findLatest(loteria);
@@ -58,23 +60,26 @@ public class LoteriasUpdate {
 	    } else if (myLatestResultado.getConcurso() < latestResultado.getConcurso()) {
 		System.out.println("COMECANDO " + loteria);
 
+		Map<String, Integer> tentativasMap = new HashMap<>();
+
 		for (int concurso = myLatestResultado.getConcurso() + 1; concurso <= latestResultado
 			.getConcurso(); concurso++) {
 		    try {
 			Resultado resultado = consumer.getResultado(loteria,
 				String.valueOf(concurso));
 			resultadoService.save(resultado);
-		    } catch (SocketTimeoutException | java.net.ConnectException e) {
-			System.out.printf("Erro (A): (%s, %d) - %s %s \n", loteria, concurso,
-				e.getClass(), e.getMessage());
-			--concurso;
-		    } catch (IOException e) {
-			System.out.printf("Erro (I): (%s, %d) - %s %s \n", loteria, concurso,
-				e.getClass(), e.getMessage());
 		    } catch (Exception e) {
-			System.out.printf("Erro (E): (%s, %d) - %s %s \n", loteria, concurso,
-				e.getClass(), e.getMessage());
-			e.printStackTrace();
+			int total = tentativasMap.getOrDefault(loteria + "-" + concurso, 0);
+
+			if (total < 20) {
+			    tentativasMap.put(loteria + "-" + concurso, ++total);
+			    --concurso;
+
+			    System.out.printf("ERRO: (%s, %d) - %s %s \n", loteria, concurso,
+				    e.getClass(), e.getMessage());
+			} else {
+			    System.out.printf("PARANDO DE BUSCAR (%s, %d)\n", loteria, concurso);
+			}
 		    }
 		}
 

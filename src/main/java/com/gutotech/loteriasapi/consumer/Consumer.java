@@ -19,6 +19,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gutotech.loteriasapi.model.Estado;
+import com.gutotech.loteriasapi.model.Loteria;
 import com.gutotech.loteriasapi.model.MunicipioUFGanhadores;
 import com.gutotech.loteriasapi.model.Premiacao;
 import com.gutotech.loteriasapi.model.Resultado;
@@ -28,24 +29,20 @@ import com.gutotech.loteriasapi.util.SSLHelper;
 @Component
 public class Consumer {
 
-    private final String BASE_URL = "https://www.sorteonline.com.br/";
-
-    public Resultado getResultado(String loteria, int concurso) throws IOException {
+    public Resultado getResultado(String loteria, int concurso) throws Exception {
 	return getResultado(loteria, String.valueOf(concurso));
     }
 
-    public Resultado getResultado(String loteria, String concurso) throws IOException {
+    public Resultado getResultado(String loteria, String concurso) throws Exception {
 	return servicebus2(loteria, concurso);
     }
 
-    private Resultado servicebus2(String loteria, String concurso) throws IOException {
+    private Resultado servicebus2(String loteria, String concurso) throws Exception {
 	String baseUrl = "https://servicebus2.caixa.gov.br/portaldeloterias/api/";
 
 	if (concurso == null) {
 	    concurso = "";
 	}
-
-//	System.out.println(loteria + " - " + concurso);
 
 	Document doc = SSLHelper.getConnection(baseUrl + loteria + "/" + concurso).get();
 	JSONObject jsonObject = new JSONObject(doc.select("body").text());
@@ -73,13 +70,17 @@ public class Consumer {
 	}
 
 	if (jsonObject.has("listaDezenas") && !jsonObject.isNull("listaDezenas")) {
-	    List<String> dezenas = jsonObject.getJSONArray("listaDezenas").toList().stream()
-		    .map(obj -> obj.toString()).collect(Collectors.toList());
+	    List<String> dezenas = jsonObject.getJSONArray("listaDezenas").toList()
+		    .stream()
+		    .map(obj -> obj.toString())
+		    .collect(Collectors.toList());
 
 	    if (jsonObject.has("listaDezenasSegundoSorteio")
 		    && !jsonObject.isNull("listaDezenasSegundoSorteio")) {
 		List<String> dezenas2 = jsonObject.getJSONArray("listaDezenasSegundoSorteio")
-			.toList().stream().map(obj -> obj.toString()).toList();
+			.toList()
+			.stream()
+			.map(obj -> obj.toString()).toList();
 
 		dezenas.addAll(dezenas2);
 	    }
@@ -89,8 +90,10 @@ public class Consumer {
 
 	// TREVOS - +MILIONARIA
 	if (jsonObject.has("trevosSorteados") && !jsonObject.isNull("trevosSorteados")) {
-	    List<String> trevos = jsonObject.getJSONArray("trevosSorteados").toList().stream()
-		    .map(obj -> obj.toString()).collect(Collectors.toList());
+	    List<String> trevos = jsonObject.getJSONArray("trevosSorteados").toList()
+		    .stream()
+		    .map(obj -> obj.toString())
+		    .collect(Collectors.toList());
 
 	    resultado.setTrevos(trevos);
 	}
@@ -100,11 +103,22 @@ public class Consumer {
 		&& !jsonObject.isNull("nomeTimeCoracaoMesSorte")) {
 	    String nomeTimeCoracaoMesSorte = jsonObject.getString("nomeTimeCoracaoMesSorte");
 
-	    nomeTimeCoracaoMesSorte = !nomeTimeCoracaoMesSorte.contains("/") ? ""
-		    : nomeTimeCoracaoMesSorte;
+	    if (loteria.equals(Loteria.DIA_DE_SORTE.toString())) {
+		try {
+		    int numeroMes = Integer.valueOf(nomeTimeCoracaoMesSorte);
 
-	    resultado.setTimeCoracao(nomeTimeCoracaoMesSorte);
-	    resultado.setMesSorte(nomeTimeCoracaoMesSorte);
+		    List<String> meses = List.of("Janeiro", "Fevereiro", "Março", "Abril", "Maio",
+			    "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro",
+			    "Dezembro");
+
+		    nomeTimeCoracaoMesSorte = meses.get(numeroMes - 1);
+		} catch (NumberFormatException e) {
+		}
+
+		resultado.setMesSorte(nomeTimeCoracaoMesSorte);
+	    } else if (loteria.equals(Loteria.TIMEMANIA.toString())) {
+		resultado.setTimeCoracao(nomeTimeCoracaoMesSorte);
+	    }
 	}
 
 	// PREMIACOES
@@ -117,6 +131,7 @@ public class Consumer {
 		    premiacao.setFaixa(jsonObject2.getInt("faixa"));
 		    premiacao.setGanhadores(jsonObject2.getInt("numeroDeGanhadores"));
 		    premiacao.setValorPremio(jsonObject2.getDouble("valorPremio"));
+		    
 		    return premiacao;
 		}).toList();
 
@@ -165,7 +180,10 @@ public class Consumer {
 	return resultado;
     }
 
+    @Deprecated
     private Resultado sorteOnline(String loteria, String concurso) throws IOException {
+	String baseUrl = "https://www.sorteonline.com.br/";
+
 	if (concurso == null) {
 	    concurso = "";
 	}
@@ -174,14 +192,11 @@ public class Consumer {
 
 	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-	Document doc = SSLHelper.getConnection(BASE_URL + loteria + "/resultados/" + concurso)
-		.get();
+	Document doc = SSLHelper.getConnection(baseUrl + loteria + "/resultados/" + concurso).get();
 	Element resultElement = doc.getElementById("DivDeVisibilidade[0]");
 
 	Resultado resultado = new Resultado(
 		new ResultadoId(loteria, concurso.equals("") ? 0 : Integer.parseInt(concurso)));
-
-	// Nome da Loteria
 
 	// Data
 	String data = resultElement.getElementsByClass("header-resultados__datasorteio").text();
