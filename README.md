@@ -43,11 +43,11 @@ https://loteriascaixa-api.herokuapp.com/api
 ]
 ```
 
-* **Resultado mais Recente**
+### **Obtendo o Resultado Mais Recente**
 
-```https://loteriascaixa-api.herokuapp.com/api/<loteria>/latest```
+URL BASE: ```https://loteriascaixa-api.herokuapp.com/api/<loteria>/latest```
 
-Por exemplo, consultado pelo resultado da Mega-Sena mais recente: 
+Apenas substitua ```<loteria>``` pelo nome da loteria desejada. Por exemplo, consultando pelo resultado da Mega-Sena (```megasena```) mais recente: 
 
 https://loteriascaixa-api.herokuapp.com/api/megasena/latest
 
@@ -76,8 +76,8 @@ https://loteriascaixa-api.herokuapp.com/api/megasena/latest
   "trevos": [
     
   ],
-  "timeCoracao": "",
-  "mesSorte": "",
+  "timeCoracao": null,
+  "mesSorte": null,
   "premiacoes": [
     {
       "descricao": "6 acertos",
@@ -139,9 +139,7 @@ https://loteriascaixa-api.herokuapp.com/api/megasena/latest
 }
 ```
 
--  **Observações sobre o retorno**
-
-Os campos <i><b>timeCoracao</b></i> e <i><b>mesSorte</b></i> só terão algum valor quando a loteria pesquisada for Timemania (timemania) ou Dia de Sorte (diadesorte) respectivamente.
+-  **Observações**: Os campos <i><b>timeCoracao</b></i> e <i><b>mesSorte</b></i> só terão algum valor quando a loteria pesquisada for Timemania (timemania) ou Dia de Sorte (diadesorte) respectivamente.
 
 ## Documentação da API
  
