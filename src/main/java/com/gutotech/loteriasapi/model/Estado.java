@@ -16,109 +16,109 @@ public class Estado {
 
     @JsonGetter("nome")
     public String getNome() {
-	return nome;
+        return nome;
     }
 
     @JsonSetter("NomeEstado")
     public void setNome(String nome) {
-	this.nome = nome;
+        this.nome = nome;
     }
 
     @JsonGetter("uf")
     public String getUf() {
-	return uf;
+        return uf;
     }
 
     @JsonSetter("SiglaEstado")
     public void setUf(String uf) {
-	this.uf = uf;
+        this.uf = uf;
     }
 
     @JsonGetter("vencedores")
     public String getVencedores() {
-	return vencedores;
+        return vencedores;
     }
 
     @JsonSetter("Quantidade")
     public void setVencedores(String vencedores) {
-	this.vencedores = vencedores;
+        this.vencedores = vencedores;
     }
 
     @JsonGetter("latitude")
     public String getLatitude() {
-	return latitude;
+        return latitude;
     }
 
     @JsonSetter("Latitude")
     public void setLatitude(String latitude) {
-	this.latitude = latitude;
+        this.latitude = latitude;
     }
 
     @JsonGetter("longitude")
     public String getLongitude() {
-	return longitude;
+        return longitude;
     }
 
     @JsonSetter("Longitude")
     public void setLongitude(String longitude) {
-	this.longitude = longitude;
+        this.longitude = longitude;
     }
 
     @JsonGetter("cidades")
     public List<Cidade> getCidades() {
-	return cidades;
+        return cidades;
     }
 
     @JsonSetter("PremiacaoPorCidade")
     public void setCidades(List<Cidade> cidades) {
-	this.cidades = cidades;
+        this.cidades = cidades;
     }
 
     public static class Cidade {
-	private String cidade;
-	private String vencedores;
-	private String latitude;
-	private String longitude;
+        private String cidade;
+        private String vencedores;
+        private String latitude;
+        private String longitude;
 
-	@JsonGetter("cidade")
-	public String getCidade() {
-	    return cidade;
-	}
+        @JsonGetter("cidade")
+        public String getCidade() {
+            return cidade;
+        }
 
-	@JsonSetter("NomeCidade")
-	public void setCidade(String cidade) {
-	    this.cidade = cidade;
-	}
+        @JsonSetter("NomeCidade")
+        public void setCidade(String cidade) {
+            this.cidade = cidade;
+        }
 
-	@JsonGetter("vencedores")
-	public String getVencedores() {
-	    return vencedores;
-	}
+        @JsonGetter("vencedores")
+        public String getVencedores() {
+            return vencedores;
+        }
 
-	@JsonSetter("Quantidade")
-	public void setVencedores(String vencedores) {
-	    this.vencedores = vencedores;
-	}
+        @JsonSetter("Quantidade")
+        public void setVencedores(String vencedores) {
+            this.vencedores = vencedores;
+        }
 
-	@JsonGetter("latitude")
-	public String getLatitude() {
-	    return latitude;
-	}
+        @JsonGetter("latitude")
+        public String getLatitude() {
+            return latitude;
+        }
 
-	@JsonSetter("Latitude")
-	public void setLatitude(String latitude) {
-	    this.latitude = latitude;
-	}
+        @JsonSetter("Latitude")
+        public void setLatitude(String latitude) {
+            this.latitude = latitude;
+        }
 
-	@JsonGetter("longitude")
-	public String getLongitude() {
-	    return longitude;
-	}
+        @JsonGetter("longitude")
+        public String getLongitude() {
+            return longitude;
+        }
 
-	@JsonSetter("Longitude")
-	public void setLongitude(String longitude) {
-	    this.longitude = longitude;
-	}
+        @JsonSetter("Longitude")
+        public void setLongitude(String longitude) {
+            this.longitude = longitude;
+        }
     }
 
 }

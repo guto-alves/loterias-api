@@ -13,25 +13,25 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class SwaggerConfig {
-	
-	@Bean
-    public Docket api() { 
-        return new Docket(DocumentationType.SWAGGER_2)  
-          .select()                                  
-          .apis(RequestHandlerSelectors.any())              
-          .paths(PathSelectors.any())  
-          .build()
-          .apiInfo(apiInfo());                                           
+
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build()
+                .apiInfo(apiInfo());
     }
-	
-	private ApiInfo apiInfo() {
+
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("Loterias API REST")
-            .description("API Gratuita de resultados de jogos das Loterias CAIXA.")
-            .version("1.0")
-            .contact(new Contact("Gustavo Alves", "https://github.com/guto-alves", "gustavoalvesb.dealmeida@gmail.com"))
-            .license("Apache License Version 2.0")
-            .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
-            .build();
-	}
+                .title("Loterias API REST")
+                .description("API Gratuita de resultados de jogos das Loterias CAIXA.")
+                .version("1.0")
+                .contact(new Contact("Gustavo Alves", "https://github.com/guto-alves", "gustavoalvesb.dealmeida@gmail.com"))
+                .license("Apache License Version 2.0")
+                .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
+                .build();
+    }
 }

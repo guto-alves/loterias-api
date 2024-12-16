@@ -8,7 +8,7 @@
   <img src="https://user-images.githubusercontent.com/48946749/147809259-e7b15a3b-2e90-42c2-abaf-a6cacdc77e03.png">
   <h2 align="center">API Loterias CAIXA</h2>
   <p align="center">
-    API Gratuita de resultado de jogos das <a href="http://loterias.caixa.gov.br/wps/portal/loterias">Loterias CAIXA</a>.<br>
+    API Gratuita de resultado de jogos das <a href="https://loterias.caixa.gov.br/wps/portal/loterias">Loterias CAIXA</a>.<br>
   </p>
 </p>
 

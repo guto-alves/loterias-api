@@ -14,68 +14,68 @@ public class MunicipioUFGanhadores {
     }
 
     public int getGanhadores() {
-	return ganhadores;
+        return ganhadores;
     }
 
     public void setGanhadores(int ganhadores) {
-	this.ganhadores = ganhadores;
+        this.ganhadores = ganhadores;
     }
 
     public String getMunicipio() {
-	return municipio;
+        return municipio;
     }
 
     public void setMunicipio(String municipio) {
-	this.municipio = municipio;
+        this.municipio = municipio;
     }
 
     public String getNomeFatansiaUL() {
-	return nomeFatansiaUL;
+        return nomeFatansiaUL;
     }
 
     public void setNomeFatansiaUL(String nomeFatansiaUL) {
-	this.nomeFatansiaUL = nomeFatansiaUL;
+        this.nomeFatansiaUL = nomeFatansiaUL;
     }
 
     public String getSerie() {
-	return serie;
+        return serie;
     }
 
     public void setSerie(String serie) {
-	this.serie = serie;
+        this.serie = serie;
     }
 
     public int getPosicao() {
-	return posicao;
+        return posicao;
     }
 
     public void setPosicao(int posicao) {
-	this.posicao = posicao;
+        this.posicao = posicao;
     }
 
     public String getUf() {
-	return uf;
+        return uf;
     }
 
     public void setUf(String uf) {
-	this.uf = uf;
+        this.uf = uf;
     }
 
     @Override
     public int hashCode() {
-	return Objects.hash(municipio, uf);
+        return Objects.hash(municipio, uf);
     }
 
     @Override
     public boolean equals(Object obj) {
-	if (this == obj) {
-	    return true;
-	}
-	if (!(obj instanceof MunicipioUFGanhadores)) {
-	    return false;
-	}
-	MunicipioUFGanhadores other = (MunicipioUFGanhadores) obj;
-	return Objects.equals(municipio, other.municipio) && Objects.equals(uf, other.uf);
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof MunicipioUFGanhadores)) {
+            return false;
+        }
+        MunicipioUFGanhadores other = (MunicipioUFGanhadores) obj;
+        return Objects.equals(municipio, other.municipio) && Objects.equals(uf, other.uf);
     }
 
 }

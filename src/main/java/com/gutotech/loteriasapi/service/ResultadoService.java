@@ -20,26 +20,26 @@ public class ResultadoService {
 
     @Cacheable("resultados")
     public List<Resultado> findByLoteria(String loteria) {
-	return repository.findById_Loteria(loteria) //
-		.stream() //
-		.sorted(Comparator.comparing(Resultado::getConcurso).reversed()) //
-		.collect(Collectors.toList());
+        return repository.findById_Loteria(loteria) //
+                .stream() //
+                .sorted(Comparator.comparing(Resultado::getConcurso).reversed()) //
+                .collect(Collectors.toList());
     }
 
     public Resultado findByLoteriaAndConcurso(String loteria, int concurso) {
-	return repository.findById(new ResultadoId(loteria, concurso)).orElse(null);
+        return repository.findById(new ResultadoId(loteria, concurso)).orElse(null);
     }
 
     public Resultado findLatest(String loteria) {
-	return repository.findTopById_Loteria(loteria).orElse(new Resultado());
+        return repository.findTopById_Loteria(loteria).orElse(new Resultado());
     }
 
-    public Resultado save(Resultado resultado) {
-	return repository.save(resultado);
+    public void save(Resultado resultado) {
+        repository.save(resultado);
     }
 
     public void saveAll(List<Resultado> resultados) {
-	repository.saveAll(resultados);
+        repository.saveAll(resultados);
     }
 
 }

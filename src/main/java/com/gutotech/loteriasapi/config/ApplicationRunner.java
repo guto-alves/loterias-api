@@ -15,8 +15,8 @@ public class ApplicationRunner implements CommandLineRunner {
     private LoteriasUpdate loteriasUpdate;
 
     @Override
-    public void run(String... args) throws Exception {
-	loteriasUpdate.checkForUpdates();
+    public void run(String... args) {
+        loteriasUpdate.checkForUpdates();
     }
 
 }

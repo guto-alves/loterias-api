@@ -20,51 +20,51 @@ public class ScheduledConsumer {
     private final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     private String getCurrentDate() {
-	return dateFormat.format(new Date());
+        return dateFormat.format(new Date());
     }
 
     @Scheduled(cron = "0 0 12 * * MON-SAT", zone = zone)
     public void checkForNewResults12() {
-	checkForUpdates();
+        checkForUpdates();
     }
 
     @Scheduled(cron = "0 0 21 * * MON-SAT", zone = zone)
     public void checkForNewResults21() {
-	checkForUpdates();
+        checkForUpdates();
     }
 
     @Scheduled(cron = "0 15 21 * * MON-SAT", zone = zone)
     public void checkForNewResults2115() {
-	checkForUpdates();
+        checkForUpdates();
     }
 
     @Scheduled(cron = "0 0 22 * * MON-SAT", zone = zone)
     public void checkForNewResults22() {
-	checkForUpdates();
+        checkForUpdates();
     }
 
     @Scheduled(cron = "0 10 23 * * MON-SAT", zone = zone)
     public void checkForNewResults2310() {
-	checkForUpdates();
+        checkForUpdates();
     }
 
     @Scheduled(cron = "0 20 0 * * MON-SAT", zone = zone)
     public void checkForNewResults0020() {
-	checkForUpdates();
+        checkForUpdates();
     }
 
     @Scheduled(cron = "0 0 1 * * MON-SAT", zone = zone)
     public void checkForNewResults01() {
-	checkForUpdates();
+        checkForUpdates();
     }
 
     public void checkForUpdates() {
-	System.out.println("checkForUpdates " + getCurrentDate());
-	
-	try {
-	    loteriasUpdate.checkForUpdates();
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
+        System.out.println("checkForUpdates " + getCurrentDate());
+
+        try {
+            loteriasUpdate.checkForUpdates();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

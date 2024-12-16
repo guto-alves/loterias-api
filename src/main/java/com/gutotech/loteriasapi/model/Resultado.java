@@ -11,9 +11,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @Document("resultados")
-@JsonPropertyOrder({ "loteria", "concurso", "data", "local", "dezenasOrdemSorteio", "dezenas",
-	"trevos", "timeCoracao", "mesSorte", "premiacoes", "municipiosUFGanhadores",
-	"estadosPremiados", "observacao", "acumulou", "proximoConcurso", "dataProximoConcurso" })
+@JsonPropertyOrder({"loteria", "concurso", "data", "local", "dezenasOrdemSorteio", "dezenas",
+        "trevos", "timeCoracao", "mesSorte", "premiacoes", "municipiosUFGanhadores",
+        "estadosPremiados", "observacao", "acumulou", "proximoConcurso", "dataProximoConcurso"})
 public class Resultado {
     @Id
     private ResultadoId id = new ResultadoId();
@@ -45,194 +45,194 @@ public class Resultado {
     }
 
     public Resultado(ResultadoId id) {
-	this.id = id;
+        this.id = id;
     }
 
     public String getLoteria() {
-	return id.getLoteria();
+        return id.getLoteria();
     }
 
     public int getConcurso() {
-	return id.getConcurso();
+        return id.getConcurso();
     }
 
     public String getData() {
-	return data;
+        return data;
     }
 
     public void setData(String data) {
-	this.data = data;
+        this.data = data;
     }
 
     public String getLocal() {
-	return local;
+        return local;
     }
 
     public void setLocal(String local) {
-	this.local = local;
+        this.local = local;
     }
 
     public List<String> getDezenas() {
-	if (dezenas.size() == 12 && Loteria.DUPLA_SENA.toString().equals(getLoteria())) {
-	    List<String> s1 = new ArrayList<>(dezenas.subList(0, 6));
-	    List<String> s2 = new ArrayList<>(dezenas.subList(6, 12));
-	    s1.sort(Comparator.naturalOrder());
-	    s2.sort(Comparator.naturalOrder());
-	    dezenas.clear();
-	    dezenas.addAll(s1);
-	    dezenas.addAll(s2);
-	} else if (!Loteria.DUPLA_SENA.toString().equals(getLoteria())
-		&& !Loteria.SUPER_SETE.toString().equals(getLoteria())
-		&& !Loteria.FEDERAL.toString().equals(getLoteria())) {
-	    dezenas.sort(Comparator.naturalOrder());
-	}
+        if (dezenas.size() == 12 && Loteria.DUPLA_SENA.toString().equals(getLoteria())) {
+            List<String> s1 = new ArrayList<>(dezenas.subList(0, 6));
+            List<String> s2 = new ArrayList<>(dezenas.subList(6, 12));
+            s1.sort(Comparator.naturalOrder());
+            s2.sort(Comparator.naturalOrder());
+            dezenas.clear();
+            dezenas.addAll(s1);
+            dezenas.addAll(s2);
+        } else if (!Loteria.DUPLA_SENA.toString().equals(getLoteria())
+                && !Loteria.SUPER_SETE.toString().equals(getLoteria())
+                && !Loteria.FEDERAL.toString().equals(getLoteria())) {
+            dezenas.sort(Comparator.naturalOrder());
+        }
 
-	return dezenas;
+        return dezenas;
     }
 
     public void setDezenas(List<String> dezenas) {
-	this.dezenas = dezenas;
+        this.dezenas = dezenas;
     }
 
     public List<String> getDezenasOrdemSorteio() {
-	return dezenasOrdemSorteio;
+        return dezenasOrdemSorteio;
     }
 
     public void setDezenasOrdemSorteio(List<String> dezenasSorteadasOrdemSorteio) {
-	this.dezenasOrdemSorteio = dezenasSorteadasOrdemSorteio;
+        this.dezenasOrdemSorteio = dezenasSorteadasOrdemSorteio;
     }
 
     public List<String> getTrevos() {
-	return trevos;
+        return trevos;
     }
 
     public void setTrevos(List<String> trevosSorteados) {
-	this.trevos = trevosSorteados;
+        this.trevos = trevosSorteados;
     }
 
     public String getTimeCoracao() {
-	return timeCoracao;
+        return timeCoracao;
     }
 
     public void setTimeCoracao(String timeCoracao) {
-	this.timeCoracao = timeCoracao;
+        this.timeCoracao = timeCoracao;
     }
 
     public String getMesSorte() {
-	return mesSorte;
+        return mesSorte;
     }
 
     public void setMesSorte(String mesSorte) {
-	this.mesSorte = mesSorte;
+        this.mesSorte = mesSorte;
     }
 
     public List<Premiacao> getPremiacoes() {
-	return premiacoes;
+        return premiacoes;
     }
 
     public void setPremiacoes(List<Premiacao> premiacoes) {
-	this.premiacoes = premiacoes;
+        this.premiacoes = premiacoes;
     }
 
     public List<Estado> getEstadosPremiados() {
-	return estadosPremiados;
+        return estadosPremiados;
     }
 
     public void setEstadosPremiados(List<Estado> estadosPremiados) {
-	this.estadosPremiados = estadosPremiados;
+        this.estadosPremiados = estadosPremiados;
     }
 
     public List<MunicipioUFGanhadores> getLocalGanhadores() {
-	return localGanhadores;
+        return localGanhadores;
     }
 
     public void setLocalGanhadores(List<MunicipioUFGanhadores> municipiosUFGanhadores) {
-	this.localGanhadores = municipiosUFGanhadores;
+        this.localGanhadores = municipiosUFGanhadores;
     }
 
     public String getObservacao() {
-	return observacao;
+        return observacao;
     }
 
     public void setObservacao(String observacao) {
-	this.observacao = observacao;
+        this.observacao = observacao;
     }
 
     public boolean isAcumulou() {
-	return acumulou;
+        return acumulou;
     }
 
     public void setAcumulou(boolean acumulado) {
-	this.acumulou = acumulado;
+        this.acumulou = acumulado;
     }
 
     public String getDataProximoConcurso() {
-	return dataProximoConcurso;
+        return dataProximoConcurso;
     }
 
     public void setDataProximoConcurso(String dataProxConcurso) {
-	this.dataProximoConcurso = dataProxConcurso;
+        this.dataProximoConcurso = dataProxConcurso;
     }
 
     public int getProximoConcurso() {
-	return id.getConcurso() + 1;
+        return id.getConcurso() + 1;
     }
 
     public double getValorArrecadado() {
-	return valorArrecadado;
+        return valorArrecadado;
     }
 
     public void setValorArrecadado(double valorArrecadado) {
-	this.valorArrecadado = valorArrecadado;
+        this.valorArrecadado = valorArrecadado;
     }
 
     public double getValorAcumuladoConcurso_0_5() {
-	return valorAcumuladoConcurso_0_5;
+        return valorAcumuladoConcurso_0_5;
     }
 
     public void setValorAcumuladoConcurso_0_5(double valorAcumuladoConcurso_0_5) {
-	this.valorAcumuladoConcurso_0_5 = valorAcumuladoConcurso_0_5;
+        this.valorAcumuladoConcurso_0_5 = valorAcumuladoConcurso_0_5;
     }
 
     public double getValorAcumuladoConcursoEspecial() {
-	return valorAcumuladoConcursoEspecial;
+        return valorAcumuladoConcursoEspecial;
     }
 
     public void setValorAcumuladoConcursoEspecial(double valorAcumuladoConcursoEspecial) {
-	this.valorAcumuladoConcursoEspecial = valorAcumuladoConcursoEspecial;
+        this.valorAcumuladoConcursoEspecial = valorAcumuladoConcursoEspecial;
     }
 
     public double getValorAcumuladoProximoConcurso() {
-	return valorAcumuladoProximoConcurso;
+        return valorAcumuladoProximoConcurso;
     }
 
     public void setValorAcumuladoProximoConcurso(double valorAcumuladoProximoConcurso) {
-	this.valorAcumuladoProximoConcurso = valorAcumuladoProximoConcurso;
+        this.valorAcumuladoProximoConcurso = valorAcumuladoProximoConcurso;
     }
 
     public double getValorEstimadoProximoConcurso() {
-	return valorEstimadoProximoConcurso;
+        return valorEstimadoProximoConcurso;
     }
 
     public void setValorEstimadoProximoConcurso(double valorEstimadoProximoConcurso) {
-	this.valorEstimadoProximoConcurso = valorEstimadoProximoConcurso;
+        this.valorEstimadoProximoConcurso = valorEstimadoProximoConcurso;
     }
 
     @Override
     public int hashCode() {
-	return Objects.hash(id);
+        return Objects.hash(id);
     }
 
     @Override
     public boolean equals(Object obj) {
-	if (this == obj) {
-	    return true;
-	}
-	if (!(obj instanceof Resultado)) {
-	    return false;
-	}
-	Resultado other = (Resultado) obj;
-	return Objects.equals(id, other.id);
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Resultado)) {
+            return false;
+        }
+        Resultado other = (Resultado) obj;
+        return Objects.equals(id, other.id);
     }
 
 }

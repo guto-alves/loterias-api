@@ -8,51 +8,51 @@ public class ErrorResponse {
     private String path;
 
     public ErrorResponse(int status, String error, String message, long timestamp, String path) {
-	this.status = status;
-	this.error = error;
-	this.message = message;
-	this.timestamp = timestamp;
-	this.path = path;
+        this.status = status;
+        this.error = error;
+        this.message = message;
+        this.timestamp = timestamp;
+        this.path = path;
     }
 
     public int getStatus() {
-	return status;
+        return status;
     }
 
     public void setStatus(int status) {
-	this.status = status;
+        this.status = status;
     }
 
     public String getError() {
-	return error;
+        return error;
     }
 
     public void setError(String error) {
-	this.error = error;
+        this.error = error;
     }
 
     public String getMessage() {
-	return message;
+        return message;
     }
 
     public void setMessage(String message) {
-	this.message = message;
+        this.message = message;
     }
 
     public long getTimestamp() {
-	return timestamp;
+        return timestamp;
     }
 
     public void setTimestamp(long timestamp) {
-	this.timestamp = timestamp;
+        this.timestamp = timestamp;
     }
 
     public String getPath() {
-	return path;
+        return path;
     }
 
     public void setPath(String path) {
-	this.path = path;
+        this.path = path;
     }
 
 }
