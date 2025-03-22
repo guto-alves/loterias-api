@@ -28,18 +28,18 @@ class ApiRestControllerTests {
 			.andDo(print())
 			.andExpect(matchAll(
 				status().isOk(),
-				jsonPath("$", hasSize(9)),
-				jsonPath("$.[0]").value("mega-sena"))
+				jsonPath("$", hasSize(10)),
+				jsonPath("$.[1]").value("megasena"))
 			);
 	}
 	
 	@Test
 	void testGetResultByIdSuccess() throws Exception {
-		mockMvc.perform(get("/api/mega-sena/1"))
+		mockMvc.perform(get("/api/megasena/1"))
 			.andDo(print())
 			.andExpect(matchAll(
 				status().isOk(),
-				jsonPath("nome").value("Mega-Sena"),
+				jsonPath("loteria").value("megasena"),
 				jsonPath("concurso").value(1),
 				jsonPath("dezenas", hasSize(6)),
 				jsonPath("timeCoracao").doesNotExist())
