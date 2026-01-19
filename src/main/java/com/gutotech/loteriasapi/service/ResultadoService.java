@@ -1,16 +1,15 @@
 package com.gutotech.loteriasapi.service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.gutotech.loteriasapi.model.Resultado;
+import com.gutotech.loteriasapi.model.ResultadoId;
+import com.gutotech.loteriasapi.repository.ResultadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.gutotech.loteriasapi.model.Resultado;
-import com.gutotech.loteriasapi.model.ResultadoId;
-import com.gutotech.loteriasapi.repository.ResultadoRepository;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ResultadoService {
@@ -31,7 +30,7 @@ public class ResultadoService {
     }
 
     public Resultado findLatest(String loteria) {
-        return repository.findTopById_Loteria(loteria).orElse(new Resultado());
+        return repository.findTopById_Loteria(loteria).orElse(null);
     }
 
     public void save(Resultado resultado) {

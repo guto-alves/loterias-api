@@ -48,8 +48,9 @@ public class LoteriasUpdate {
             Resultado latestResultado = consumer.getResultado(loteria, null);
 
             Resultado myLatestResultado = resultadoService.findLatest(loteria);
+            int myLatestConcurso = nonNull(myLatestResultado) ? myLatestResultado.getConcurso() : 0;
 
-            if (myLatestResultado.getConcurso() == latestResultado.getConcurso()) {
+            if (myLatestConcurso == latestResultado.getConcurso()) {
                 myLatestResultado.setData(latestResultado.getData());
                 myLatestResultado.setLocal(latestResultado.getLocal());
 
@@ -64,8 +65,7 @@ public class LoteriasUpdate {
 
                 Map<String, Integer> tentativasMap = new HashMap<>();
 
-                for (int concurso = myLatestResultado.getConcurso() + 1; concurso <= latestResultado
-                        .getConcurso(); concurso++) {
+                for (int concurso = myLatestConcurso + 1; concurso <= latestResultado.getConcurso(); concurso++) {
                     try {
                         Resultado resultado = consumer.getResultado(loteria, String.valueOf(concurso));
                         resultadoService.save(resultado);
