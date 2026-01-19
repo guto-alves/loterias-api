@@ -42,7 +42,7 @@ public class ApiRestController {
     @GetMapping("{loteria}")
     @ApiOperation(value = "Retorna todos os resultados já realizados da loteria especificada.")
     public ResponseEntity<List<Resultado>> getResultsByLottery(
-            @ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) @PathVariable("loteria") String loteria) {
+            @PathVariable @ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) String loteria) {
         if (!lotteries.contains(loteria)) {
             throw new ResourceNotFoundException(INVALID_LOTTERY_MESSAGE.formatted(loteria, lotteries));
         }
@@ -52,8 +52,8 @@ public class ApiRestController {
     @GetMapping("{loteria}/{concurso}")
     @ApiOperation(value = "Retorna o resultado da loteria e concurso especificado.")
     public ResponseEntity<Resultado> getResultById(
-            @ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) @PathVariable("loteria") String loteria,
-            @PathVariable("concurso") Integer concurso) {
+            @PathVariable @ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) String loteria,
+            @PathVariable Integer concurso) {
         if (!lotteries.contains(loteria)) {
             throw new ResourceNotFoundException(INVALID_LOTTERY_MESSAGE.formatted(loteria, lotteries));
         }
@@ -68,7 +68,7 @@ public class ApiRestController {
     @GetMapping("{loteria}/latest")
     @ApiOperation(value = "Retorna o resultado mais recente da loteria especificada.")
     public ResponseEntity<Resultado> getLatestResult(
-            @ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) @PathVariable("loteria") String loteria) {
+            @PathVariable @ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) String loteria) {
         if (!lotteries.contains(loteria)) {
             throw new ResourceNotFoundException(INVALID_LOTTERY_MESSAGE.formatted(loteria, lotteries));
         }
