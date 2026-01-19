@@ -78,8 +78,8 @@ public class Resultado {
         return concursoEspecial;
     }
 
-    public void setConcursoEspecial(boolean isConcursoEspecial) {
-        this.concursoEspecial = isConcursoEspecial;
+    public void setConcursoEspecial(boolean concursoEspecial) {
+        this.concursoEspecial = concursoEspecial;
     }
 
     public List<String> getDezenas() {
