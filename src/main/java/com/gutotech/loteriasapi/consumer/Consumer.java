@@ -57,6 +57,9 @@ public class Consumer {
                 + jsonObject.getString("nomeMunicipioUFSorteio");
         resultado.setLocal(local);
 
+        int indicadorConcursoEspecial = jsonObject.optInt("indicadorConcursoEspecial", 0);
+        resultado.setConcursoEspecial(indicadorConcursoEspecial == 2);
+
         // DEZENAS
         if (jsonObject.has("dezenasSorteadasOrdemSorteio")
                 && !jsonObject.isNull("dezenasSorteadasOrdemSorteio")) {
