@@ -13,6 +13,8 @@ import com.gutotech.loteriasapi.model.Loteria;
 import com.gutotech.loteriasapi.model.Resultado;
 import com.gutotech.loteriasapi.service.ResultadoService;
 
+import static java.util.Objects.nonNull;
+
 @Component
 public class LoteriasUpdate {
 
