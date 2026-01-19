@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @Document("resultados")
-@JsonPropertyOrder({"loteria", "concurso", "data", "local", "dezenasOrdemSorteio", "dezenas",
+@JsonPropertyOrder({"loteria", "concurso", "data", "local", "concursoEspecial", "dezenasOrdemSorteio", "dezenas",
         "trevos", "timeCoracao", "mesSorte", "premiacoes", "municipiosUFGanhadores",
         "estadosPremiados", "observacao", "acumulou", "proximoConcurso", "dataProximoConcurso"})
 public class Resultado {
@@ -19,6 +19,8 @@ public class Resultado {
     private ResultadoId id = new ResultadoId();
     private String data;
     private String local;
+
+    private boolean concursoEspecial;
 
     private List<String> dezenasOrdemSorteio = new ArrayList<>();
     private List<String> dezenas = new ArrayList<>();
@@ -70,6 +72,14 @@ public class Resultado {
 
     public void setLocal(String local) {
         this.local = local;
+    }
+
+    public boolean isConcursoEspecial() {
+        return concursoEspecial;
+    }
+
+    public void setConcursoEspecial(boolean concursoEspecial) {
+        this.concursoEspecial = concursoEspecial;
     }
 
     public List<String> getDezenas() {

@@ -1,30 +1,31 @@
 package com.gutotech.loteriasapi.consumer;
 
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
-
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gutotech.loteriasapi.model.*;
 import org.json.JSONObject;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gutotech.loteriasapi.model.Estado;
-import com.gutotech.loteriasapi.model.Loteria;
-import com.gutotech.loteriasapi.model.MunicipioUFGanhadores;
-import com.gutotech.loteriasapi.model.Premiacao;
-import com.gutotech.loteriasapi.model.Resultado;
-import com.gutotech.loteriasapi.model.ResultadoId;
-import com.gutotech.loteriasapi.util.SSLHelper;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class Consumer {
+
+    private final HttpConnectionService httpConnectionService;
+
+    public Consumer(HttpConnectionService httpConnectionService) {
+        this.httpConnectionService = httpConnectionService;
+    }
 
     public Resultado getResultado(String loteria, int concurso) throws Exception {
         return getResultado(loteria, String.valueOf(concurso));
@@ -41,7 +42,7 @@ public class Consumer {
             concurso = "";
         }
 
-        Document doc = SSLHelper.getConnection(baseUrl + loteria + "/" + concurso).get();
+        Document doc = httpConnectionService.get(baseUrl + loteria + "/" + concurso);
         JSONObject jsonObject = new JSONObject(doc.select("body").text());
 
         ResultadoId resultadoId = new ResultadoId(loteria, jsonObject.getInt("numero"));
@@ -56,6 +57,9 @@ public class Consumer {
         String local = jsonObject.getString("localSorteio") + " em "
                 + jsonObject.getString("nomeMunicipioUFSorteio");
         resultado.setLocal(local);
+
+        int indicadorConcursoEspecial = jsonObject.optInt("indicadorConcursoEspecial", 0);
+        resultado.setConcursoEspecial(indicadorConcursoEspecial == 2);
 
         // DEZENAS
         if (jsonObject.has("dezenasSorteadasOrdemSorteio")
@@ -178,7 +182,7 @@ public class Consumer {
     }
 
     @Deprecated
-    private Resultado sorteOnline(String loteria, String concurso) throws IOException {
+    private Resultado sorteOnline(String loteria, String concurso) throws Exception {
         String baseUrl = "https://www.sorteonline.com.br/";
 
         if (concurso == null) {
@@ -189,7 +193,7 @@ public class Consumer {
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-        Document doc = SSLHelper.getConnection(baseUrl + loteria + "/resultados/" + concurso).get();
+        Document doc = httpConnectionService.get(baseUrl + loteria + "/resultados/" + concurso);
         Element resultElement = doc.getElementById("DivDeVisibilidade[0]");
 
         Resultado resultado = new Resultado(
