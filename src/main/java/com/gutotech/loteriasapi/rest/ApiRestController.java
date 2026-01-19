@@ -43,9 +43,7 @@ public class ApiRestController {
     @ApiOperation(value = "Retorna todos os resultados já realizados da loteria especificada.")
     public ResponseEntity<List<Resultado>> getResultsByLottery(
             @PathVariable @ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) String loteria) {
-        if (!lotteries.contains(loteria)) {
-            throw new ResourceNotFoundException(INVALID_LOTTERY_MESSAGE.formatted(loteria, lotteries));
-        }
+        validateLottery(loteria);
         return ResponseEntity.ok(resultadoService.findByLoteria(loteria));
     }
 
@@ -54,9 +52,7 @@ public class ApiRestController {
     public ResponseEntity<Resultado> getResultById(
             @PathVariable @ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) String loteria,
             @PathVariable Integer concurso) {
-        if (!lotteries.contains(loteria)) {
-            throw new ResourceNotFoundException(INVALID_LOTTERY_MESSAGE.formatted(loteria, lotteries));
-        }
+        validateLottery(loteria);
 
         Resultado resultado = resultadoService.findByLoteriaAndConcurso(loteria, concurso);
         if (resultado == null) {
@@ -69,14 +65,19 @@ public class ApiRestController {
     @ApiOperation(value = "Retorna o resultado mais recente da loteria especificada.")
     public ResponseEntity<Resultado> getLatestResult(
             @PathVariable @ApiParam(allowableValues = ALLOWABLE_VALUES, required = true) String loteria) {
-        if (!lotteries.contains(loteria)) {
-            throw new ResourceNotFoundException(INVALID_LOTTERY_MESSAGE.formatted(loteria, lotteries));
-        }
+        validateLottery(loteria);
+
         Resultado resultado = resultadoService.findLatest(loteria);
         if (resultado == null) {
             throw new ResourceNotFoundException(NO_RESULTS_FOUND_MESSAGE.formatted(loteria));
         }
         return ResponseEntity.ok(resultado);
+    }
+
+    private void validateLottery(String loteria) {
+        if (!lotteries.contains(loteria)) {
+            throw new ResourceNotFoundException(INVALID_LOTTERY_MESSAGE.formatted(loteria, lotteries));
+        }
     }
 
 }
