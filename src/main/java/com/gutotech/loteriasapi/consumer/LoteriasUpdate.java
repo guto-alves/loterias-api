@@ -1,22 +1,24 @@
 package com.gutotech.loteriasapi.consumer;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.gutotech.loteriasapi.model.Loteria;
+import com.gutotech.loteriasapi.model.Resultado;
+import com.gutotech.loteriasapi.service.ResultadoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 
-import com.gutotech.loteriasapi.model.Loteria;
-import com.gutotech.loteriasapi.model.Resultado;
-import com.gutotech.loteriasapi.service.ResultadoService;
+import java.util.HashMap;
+import java.util.Map;
 
 import static java.util.Objects.nonNull;
 
 @Component
 public class LoteriasUpdate {
+    private static final Logger logger = LoggerFactory.getLogger(LoteriasUpdate.class);
 
     @Autowired
     private LoteriaUpdateTask loteriaUpdateTask;
@@ -29,7 +31,7 @@ public class LoteriasUpdate {
             try {
                 loteriaUpdateTask.checkForUpdates(loteria.getNome());
             } catch (Exception e) {
-                System.out.println("Erro " + loteria + ": " + e.getMessage());
+                logger.error("Error updating {}", loteria.getNome(), e);
             }
         }
 
@@ -62,8 +64,9 @@ public class LoteriasUpdate {
                 myLatestResultado.setDataProximoConcurso(latestResultado.getDataProximoConcurso());
 
                 resultadoService.save(myLatestResultado);
-            } else if (myLatestResultado.getConcurso() < latestResultado.getConcurso()) {
-                System.out.println("COMECANDO " + loteria);
+                logger.info("{} is up to date at concurso {}", loteria, myLatestResultado.getConcurso());
+            } else if (myLatestConcurso < latestResultado.getConcurso()) {
+                logger.info("Updating {} from {} to {}", loteria, myLatestConcurso, latestResultado.getConcurso());
 
                 Map<String, Integer> tentativasMap = new HashMap<>();
 
@@ -71,22 +74,22 @@ public class LoteriasUpdate {
                     try {
                         Resultado resultado = consumer.getResultado(loteria, String.valueOf(concurso));
                         resultadoService.save(resultado);
+                        logger.info("Saved result for {} {}", loteria, concurso);
                     } catch (Exception e) {
                         int total = tentativasMap.getOrDefault(loteria + "-" + concurso, 0);
 
                         if (total < 20) {
                             tentativasMap.put(loteria + "-" + concurso, ++total);
+                            logger.error("Error fetching result for {} {}, attempt {}", loteria, concurso, total, e);
                             --concurso;
-
-                            System.out.printf("ERRO: (%s, %d) - %s %s \n", loteria, concurso, e.getClass(),
-                                    e.getMessage());
                         } else {
-                            System.out.printf("PARANDO DE BUSCAR (%s, %d)\n", loteria, concurso);
+                            logger.error("Giving up fetching result for {} {} after {} attempts",
+                                    loteria, concurso, total);
                         }
                     }
                 }
 
-                System.out.println("TERMINANDO " + loteria);
+                logger.info("Finished updating {}", loteria);
             }
         }
     }
