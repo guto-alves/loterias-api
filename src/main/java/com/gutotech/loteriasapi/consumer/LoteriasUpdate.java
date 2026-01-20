@@ -31,7 +31,7 @@ public class LoteriasUpdate {
             try {
                 loteriaUpdateTask.checkForUpdates(loteria.getNome());
             } catch (Exception e) {
-                logger.error("Error updating {}: {}", loteria.getNome(), e.getMessage());
+                logger.error("Error updating {}", loteria.getNome(), e);
             }
         }
 
@@ -80,8 +80,8 @@ public class LoteriasUpdate {
 
                         if (total < 20) {
                             tentativasMap.put(loteria + "-" + concurso, ++total);
-                            --concurso;
                             logger.error("Error fetching result for {} {}, attempt {}", loteria, concurso, total, e);
+                            --concurso;
                         } else {
                             logger.error("Giving up fetching result for {} {} after {} attempts",
                                     loteria, concurso, total);
