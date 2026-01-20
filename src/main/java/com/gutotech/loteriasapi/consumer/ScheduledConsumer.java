@@ -1,9 +1,7 @@
 package com.gutotech.loteriasapi.consumer;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -12,16 +10,12 @@ import org.springframework.stereotype.Component;
 @Component
 @EnableScheduling
 public class ScheduledConsumer {
+    private static final Logger logger = LoggerFactory.getLogger(ScheduledConsumer.class);
+
+    private final String zone = "America/Sao_Paulo";
 
     @Autowired
     private LoteriasUpdate loteriasUpdate;
-
-    private final String zone = "America/Sao_Paulo";
-    private final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
-    private String getCurrentDate() {
-        return dateFormat.format(new Date());
-    }
 
     @Scheduled(cron = "0 0 12 * * MON-SAT", zone = zone)
     public void checkForNewResults12() {
@@ -59,12 +53,13 @@ public class ScheduledConsumer {
     }
 
     public void checkForUpdates() {
-        System.out.println("checkForUpdates " + getCurrentDate());
+        logger.info("Checking for updates");
 
         try {
             loteriasUpdate.checkForUpdates();
+            logger.info("Finished checking for updates");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error during checkForUpdates", e);
         }
     }
 }
