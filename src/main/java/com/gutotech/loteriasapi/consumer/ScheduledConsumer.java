@@ -18,43 +18,14 @@ public class ScheduledConsumer {
     private LoteriasUpdate loteriasUpdate;
 
     @Scheduled(cron = "0 0 12 * * MON-SAT", zone = zone)
-    public void checkForNewResults12() {
-        checkForUpdates();
-    }
-
     @Scheduled(cron = "0 0 21 * * MON-SAT", zone = zone)
-    public void checkForNewResults21() {
-        checkForUpdates();
-    }
-
     @Scheduled(cron = "0 15 21 * * MON-SAT", zone = zone)
-    public void checkForNewResults2115() {
-        checkForUpdates();
-    }
-
     @Scheduled(cron = "0 0 22 * * MON-SAT", zone = zone)
-    public void checkForNewResults22() {
-        checkForUpdates();
-    }
-
     @Scheduled(cron = "0 10 23 * * MON-SAT", zone = zone)
-    public void checkForNewResults2310() {
-        checkForUpdates();
-    }
-
     @Scheduled(cron = "0 20 0 * * MON-SAT", zone = zone)
-    public void checkForNewResults0020() {
-        checkForUpdates();
-    }
-
     @Scheduled(cron = "0 0 1 * * MON-SAT", zone = zone)
-    public void checkForNewResults01() {
-        checkForUpdates();
-    }
-
     public void checkForUpdates() {
         logger.info("Checking for updates");
-
         try {
             loteriasUpdate.checkForUpdates();
             logger.info("Finished checking for updates");
